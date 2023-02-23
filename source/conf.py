@@ -20,7 +20,8 @@ extensions = [
     "sphinx.ext.todo",
     "sphinx.ext.coverage",
     "sphinx.ext.viewcode",
-    "sphinx.ext.githubpages"
+    "sphinx.ext.githubpages",
+    "sphinx_copybutton"
     ]
 
 templates_path = ['_templates']
@@ -49,3 +50,5 @@ html_theme_options = {
     "includehidden": True,
     "titles_only": False,
 }
+
+pygments_style = 'sphinx'
