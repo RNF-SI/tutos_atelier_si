@@ -8,4 +8,5 @@ Tutos de l'Atelier SI en réseau de Réserves Naturelles de France !
 
 .. toctree::
  contribuer
+ wsl_flask
 
