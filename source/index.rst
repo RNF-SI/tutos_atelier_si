@@ -6,7 +6,19 @@
 Tutos de l'Atelier SI en réseau de Réserves Naturelles de France !
 ==================================================================
 
+Les tutos présentés ici sont issus des travaux de l'atelier Systèmes d'Informations en réseau de Réserves Naturelles de France. 
+
+Ils sont proposés par les membres de l'ateliers, dans le cadre d'une présentation/démonstration en séance, ou en simple partage si jugé opportun. 
+
+Les dates et sujets des ateliers futurs peuvent être retrouvés sur `la page de l'atelier du portail RNF <https://www.portail.reserves-naturelles.org/page/1496002-systemes-d-information-en-reseau>`_.
+
 .. toctree::
  contribuer
  wsl_flask
+ deployer_geonature
 
+Contributeurs :
+---------------
+
+* `Zacharie Moulin (RNF) <https://github.com/MoulinZ>`_
+* `Maxime Toma (LPO) <https://github.com/maximetoma>`_

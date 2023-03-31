@@ -1,5 +1,7 @@
-Windows Sub-System Linux / Environnement virtuel / Flask
-========================================================
+Windows Sub-System Linux / Environnement virtuel / Flask (Atelier du 9 mars 2023)
+==================================================================================
+
+..  youtube:: 9mcMAR5bMXs 
 
 Installer un sub-system Linux
 -----------------------------
