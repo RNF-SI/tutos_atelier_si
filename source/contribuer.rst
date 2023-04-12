@@ -45,50 +45,75 @@ Vous pouvez utiliser ``deactivate`` pour quitter l'environnement virtuel, mais v
 Contribuer au projet
 --------------------
 
-La branche main est protégée en écriture, vous ne pourrez pas directement pusher vos modifications dessus. Vous devez donc, dans un premier temps, créer votre propre branche de travail :
+Créer une nouvelle branche
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: bash
+    La branche main est protégée en écriture, vous ne pourrez pas directement pusher vos modifications dessus. Vous devez donc, dans un premier temps, créer votre propre branche de travail :
 
-    git checkout manouvellebranche
+    .. code-block:: bash
 
-Vous pouvez bien sûr le faire directement depuis votre éditeur de code en clic bouton s'il le permet (comme vscode par exemple).
+        git checkout manouvellebranche
 
-Une fois dans votre branche, vous pouvez effectuer les modifications que vous souhaitez. 
+    Vous pouvez bien sûr le faire directement depuis votre éditeur de code en clic bouton s'il le permet (comme vscode par exemple).
 
-Si vous souhaitez créer un nouveau tuto, ajouter un fichier .rst dans le dossier source (montuto.rst).
+    Une fois dans votre branche, vous pouvez effectuer les modifications que vous souhaitez. 
 
-Vous devez ensuite l'ajouter au fichier index.rst pour qu'il soit référencé dans l'arboressance :
+Créer un nouveau tuto
+~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: RST 
+    Si vous souhaitez créer un nouveau tuto, ajouter un fichier .rst dans le dossier source (montuto.rst).
 
-    .. toctree::
-        contribuer
-        montuto
+    Vous devez ensuite l'ajouter au fichier index.rst pour qu'il soit référencé dans l'arboressance :
 
-L'arboressance reprendra les titres et sous-titres de votre fichier (vous verrez juste après comment créer des titres et sous-titres dans votre fichier).
+    .. code-block:: RST 
 
-Dès que vous ajoutez du contenu (voir section suivante), et si vous voulez voir à quoi ça ressemble, lancez la commande de compilation de sphinx :
+        .. toctree::
+            contribuer
+            montuto
 
-.. code-block:: bash
+    L'arboressance reprendra les titres et sous-titres de votre fichier (vous verrez juste après comment créer des titres et sous-titres dans votre fichier).
 
-    make html
+Génération des fichier HTML
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ensuite, lancez simplement le fichier ``index.html`` dans votre navigateur préféré, et admirez votre travail. 
+    Dès que vous ajoutez du contenu (voir section suivante), et si vous voulez voir à quoi ça ressemble, lancez la commande de compilation de sphinx :
 
-Pensez à faire régulièrement des commit de votre travail, soit en clic bouton avec votre éditeur, soit avec la commande suivante :
+    .. code-block:: bash
 
-.. code-block:: bash
+        make html
 
-    git commit -m 'message du commit'
+    Ensuite, lancez simplement le fichier ``index.html`` dans votre navigateur préféré, et admirez votre travail. 
 
-Une fois votre travail terminé, vous pouvez le push sur le github :
 
-.. code-block:: bash
+Automatique Génération des fichier HTML
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    git pull
-    git push
+    | Vous pouvez également faire en sorte que le code HTML soit automatiquement régénéré, chaque fois que vous enregistrez une modification. 
+    | Cela vous permet de garder le projet ouvert dans votre navigateur et d'afficher les modifications immédiatement. 
 
-Il faudra ensuite aller sur GitHub pour faire une pull-request, afin que j'ajoute votre contribution au contenu global. Encore une fois, certains éditeurs comme VScode permettent de faire des pullrequest directement depuis l'outil.
+    .. code-block:: bash
+
+        make livehtml
+
+    Les pages HTML générées seront par défaut généré sur l'adresse http://127.0.0.1:8000.
+
+Enregistrer / Partager le nouveau tuto
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Pensez à faire régulièrement des commit de votre travail, soit en clic bouton avec votre éditeur, soit avec la commande suivante :
+
+    .. code-block:: bash
+
+        git commit -m 'message du commit'
+
+    Une fois votre travail terminé, vous pouvez le push sur le github :
+
+    .. code-block:: bash
+
+        git pull
+        git push
+
+    Il faudra ensuite aller sur GitHub pour faire une pull-request, afin que j'ajoute votre contribution au contenu global. Encore une fois, certains éditeurs comme VScode permettent de faire des pullrequest directement depuis l'outil.
 
 reStructuredText
 ----------------
