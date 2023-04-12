@@ -73,8 +73,8 @@ Créer un nouveau tuto
 
     L'arboressance reprendra les titres et sous-titres de votre fichier (vous verrez juste après comment créer des titres et sous-titres dans votre fichier).
 
-Génération des fichier HTML
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Génération des fichiers HTML
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Dès que vous ajoutez du contenu (voir section suivante), et si vous voulez voir à quoi ça ressemble, lancez la commande de compilation de sphinx :
 
@@ -85,8 +85,8 @@ Génération des fichier HTML
     Ensuite, lancez simplement le fichier ``index.html`` dans votre navigateur préféré, et admirez votre travail. 
 
 
-Automatique Génération des fichier HTML
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Automatique Génération des fichiers HTML
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     | Vous pouvez également faire en sorte que le code HTML soit automatiquement régénéré, chaque fois que vous enregistrez une modification. 
     | Cela vous permet de garder le projet ouvert dans votre navigateur et d'afficher les modifications immédiatement. 
