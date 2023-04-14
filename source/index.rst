@@ -23,3 +23,4 @@ Contributeurs :
 
 * `Zacharie Moulin (RNF) <https://github.com/MoulinZ>`_
 * `Maxime Toma (LPO) <https://github.com/maximetoma>`_
+* `Colas Geier (CEN Isère) <https://github.com/cen-cgeier>`_
