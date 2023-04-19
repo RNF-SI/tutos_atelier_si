@@ -4,6 +4,14 @@ Développer un plugin Qgis
 | source `geotribu <https://static.geotribu.fr/articles/2010/2010-09-23_creer_ses_propres_plugin_qgis/>`_ (un peu ancienne mais qui donne une trame)
 | source `docs.qgis <https://docs.qgis.org/3.28/fr/docs/pyqgis_developer_cookbook/plugins/plugins.html#getting-started>`_
 
+**A savoir :**
+
+   - Dans un QGIS configurer en Français, un plugin est appelé une ``Extensions``. 
+   - Une fois développé, le plugin s'intalle et se met à jour au travers du gestionnaire d'Extensions.
+
+   .. image:: /_static/qgis_builder/extensions.png
+
+
 Installer les extensions QGIS
 -----------------------------
 
@@ -213,7 +221,7 @@ Depuis un dépot Serveur / Git
                <deprecated>False</deprecated>
                <tracker>https://framagit.org/.../.../monAutrePlugin/issues</tracker>
                <repository>https://framagit.org/.../.../monAutrePlugin</repository>
-               <tags>mnt,craig,cen38</tags>
+               <tags>Python,RNF, ... </tags>
                <downloads></downloads>
                <average_vote></average_vote>
                <rating_votes></rating_votes>
@@ -226,10 +234,22 @@ Depuis un dépot Serveur / Git
    3. Dans le menu de droite, sélectionnez l'onglet « Paramètres ».
    4. Ajouter un nouveau dépot en saisissant la localité de votre fichier HTML.
 
+Besoin de modifications, où trouver mon plugin ?
+------------------------------------------------
+
+   Vous l'avez probablement perçu, une fois installé un plugin en développement a très souvent besoin d'être modifié, adapté, paufiné. Pour se faire, il est souvent plus confortable d'aller modifier votre plugin directement dans les dossiers de QGIS. Ainsi, à chaque modification d'un fichier, il vous suffira de recharger votre plugin à l'aide de ``Plugin Reloader`` pour constater le résultat.
+
+   Pour identifier le dossier d'installation de votre plugin : 
+
+   - Ouvrez le gestionnaire d'extensions ``Extensions > Installées``.
+   - Cliquer sur le numéro de version en face de la variable ``Version installée  X.Y.Z``.
+
+      .. image:: ./_static/qgis_builder/version_installee.png
+
 Customisation de l'interface graphique (frontend)
 -------------------------------------------------
 
-   Ouvrez le fichier ``.ui``  de votre plugin, installé dans votre QGIS, à l'aide de QT Designer.
+   Ouvrez le fichier ``.ui``  de votre plugin (cf. `Besoin de modifications, où trouver mon plugin ?`_), installé dans votre QGIS, à l'aide de QT Designer.
 
 
       .. video:: ./_static/qgis_builder/custom_frontend.webm
@@ -246,80 +266,99 @@ Customisation de l'interface graphique (frontend)
    |   - Insérer le widget ``QsgAuthConfigSelect``, permettra aux utilisateurs de sélectionner un identifiant stocké dans son coffre-fort de mot de passe.
    |   - Insérer le widget ``QLineEdit`` pour la saisie de l'identifiant et le widget ``QsgPasswordLineEdit`` pour la saisie du mot de passe.
 
-Codage des process (backend)
-----------------------------
+Codage des process (backend) PyQGIS
+-----------------------------------
 
-Voici différentes ressources documentaires pouvant vous être utile dans votre développement :
+   Voici différentes ressources documentaires pouvant vous être utile dans votre développement :
 
-- source `doc.qt.io <https://doc.qt.io/qtforpython/index.html>`_
-- source `qgis.org  <https://qgis.org/pyqgis/master/index.html>`_
-- source `pythonguis <https://www.pythonguis.com/tutorials/creating-your-first-pyqt-window/>`_
-- source `riverbankcomputing <https://www.riverbankcomputing.com/static/Docs/PyQt5/>`_
+   - source `docs.qgis.org/pyqgis_developer_cookbook <https://docs.qgis.org/3.28/fr/docs/pyqgis_developer_cookbook/cheat_sheet.html>`_
+   - source `doc.qt.io <https://doc.qt.io/qtforpython/index.html>`_
+   - source `qgis.org  <https://qgis.org/pyqgis/master/index.html>`_
+   - source `pythonguis <https://www.pythonguis.com/tutorials/creating-your-first-pyqt-window/>`_
+   - source `riverbankcomputing <https://www.riverbankcomputing.com/static/Docs/PyQt5/>`_
 
+
+   Pour coder les processus de votre plugin, vous aurez besoin à minima de modifier le fichier ``monPlugin.py``.
+
+   | Pour chaque éléments placés sur votre interface graphique, il vous faudra :
+   |    - Soit, lui attribuer un objet PyQGIS (objet Python de qgis)
+   |    - Soit, récupérer le résultat de l'objet.
+   |    - Soit, les 2 mon capitaine !
+
+
+Les variables utiles (`docs.qgis/pyqgis_developer_cookbook <https://docs.qgis.org/3.28/fr/docs/pyqgis_developer_cookbook/cheat_sheet.html#>`_)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   | - ``iface`` Objet renvoyant à l'interface graphique.
+   | - ``iface.mapCanvas()`` Objet premettant d'accèder au Canevas.
+   | - ``iface.activeLayer()`` Objet identifiant la couche sélectionnée.
+   | - ``QgsProject.instance().mapLayers().values()`` Objet listant les couche du projet.
+   | - Et tellement d'autre encore ! Explorer la/les docs.
 
 Activer le plugin à la sélection d'une couche spécifique
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: py
-   
-   class BankPlanGestion:
-      """QGIS Plugin Implementation."""
-
-      def __init__(self, iface):
-         ...
-         # Save reference to the QGIS interface
-         self.iface = iface
-         self.canvas = self.iface.mapCanvas()
-         self.activeCouche = self.iface.activeLayer()
-         
-         ...
-
-         self.canvas.selectionChanged.connect(self.toggle)
-         self.iface.layerTreeView().currentLayerChanged.connect(self.toggle)
+   .. code-block:: py
       
+      class BankPlanGestion:
+         """QGIS Plugin Implementation."""
 
-      def toggle(self):
-         if self.iface.activeLayer():
-            layer = self.iface.activeLayer().dataProvider().dataSourceUri(True)
+         def __init__(self, iface):
+            ...
+            # Save reference to the QGIS interface
+            self.iface = iface
+            self.canvas = self.iface.mapCanvas()
+            self.activeCouche = self.iface.activeLayer()
+            
+            ...
 
-            if layer == 'maCoucheSélectionnée':
-               self.actions[0].setEnabled(True)
+            self.canvas.selectionChanged.connect(self.toggle)
+            self.iface.layerTreeView().currentLayerChanged.connect(self.toggle)
+         
+
+         def toggle(self):
+            if self.iface.activeLayer():
+               layer = self.iface.activeLayer().dataProvider().dataSourceUri(True)
+
+               if layer == 'maCoucheSélectionnée':
+                  self.actions[0].setEnabled(True)
+               else:
+                  self.actions[0].setEnabled(False)
+
             else:
                self.actions[0].setEnabled(False)
-
-         else:
-            self.actions[0].setEnabled(False)
 
 
 Récupérer les accès à une couche Postgis chargée
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: py
+   .. code-block:: py
 
-   class BankPlanGestion:
-      """QGIS Plugin Implementation."""
+      class BankPlanGestion:
+         """QGIS Plugin Implementation."""
 
-      ...
+         ...
 
-      def get_param_postgisLayer(self):
-         if self.iface.activeLayer():
-            layer_names = [layer.name() for layer in QgsProject.instance().mapLayers().values()]
+         def get_param_postgisLayer(self):
+            if self.iface.activeLayer():
+               layer_names = [layer.name() for layer in QgsProject.instance().mapLayers().values()]
 
-            if 'maTablePostgis' in layer_names:
-               layer = QgsProject.instance().mapLayersByName('maTablePostgis')[0].dataProvider().dataSourceUri(True)
-               self.user = layer.split("user='")[1].split("' ",1)[0]
-               self.password = layer.split("password='")[1].split("' ",1)[0]
-               self.dbname = layer.split("dbname='")[1].split("' ",1)[0]
-               self.host = layer.split("host=")[1].split(" ",1)[0]
-               self.port = layer.split("port=")[1].split(" ",1)[0]
-            else :
-               self.user = None
-               self.password = None
-               self.dbname = None
-               self.host = None
-               self.port = None
+               if 'maTablePostgis' in layer_names:
+                  layer = QgsProject.instance().mapLayersByName('maTablePostgis')[0].dataProvider().dataSourceUri(True)
+                  self.user = layer.split("user='")[1].split("' ",1)[0]
+                  self.password = layer.split("password='")[1].split("' ",1)[0]
+                  self.dbname = layer.split("dbname='")[1].split("' ",1)[0]
+                  self.host = layer.split("host=")[1].split(" ",1)[0]
+                  self.port = layer.split("port=")[1].split(" ",1)[0]
+               else :
+                  self.user = None
+                  self.password = None
+                  self.dbname = None
+                  self.host = None
+                  self.port = None
 
 
 Utiliser les icônes intégrées de QGIS pour égayer ses plugins (PyQGIS Icons Cheatsheet)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-source `geotribu/articles/2023/2023-03-24 <https://static.geotribu.fr/articles/2023/2023-03-24_pyqgis-icones-cheatsheet-automatisation/?utm_campaign=feed-syndication&utm_medium=RSS&utm_source=rss-feed&utm_source=Geotribu&utm_campaign=7e395e4c85-RSS_EMAIL_CAMPAIGN_WEEKLY&utm_medium=email&utm_term=0_6c4efaf092-7e395e4c85-549540402>`_
+   | source `geotribu/articles/2023/2023-03-24 <https://static.geotribu.fr/articles/2023/2023-03-24_pyqgis-icones-cheatsheet-automatisation/?utm_campaign=feed-syndication&utm_medium=RSS&utm_source=rss-feed&utm_source=Geotribu&utm_campaign=7e395e4c85-RSS_EMAIL_CAMPAIGN_WEEKLY&utm_medium=email&utm_term=0_6c4efaf092-7e395e4c85-549540402>`_
+   | source `pyqgis-icons-cheatsheet.geotribu <https://pyqgis-icons-cheatsheet.geotribu.fr/#themesdefault>`_
