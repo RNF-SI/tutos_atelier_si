@@ -4,6 +4,11 @@ Contribuer à cette documentation
 Vous pouvez contribuer à la documentation des tutos de l'atelier SI, soit parce que vous animez un atelier et présentez des outils, soit parce que vous souhaitez partager des infos sans pouvoir faire une présentation. 
 Ces explications vous indiquent la démarche à suivre pour contribuer :
 
+Poser une question
+-------------------
+
+Pour poser une question, rendez-vous sur la page GitHub du du projet ``tutos_atelier_si`` et poser votre question dans une nouvelle `Issue <https://github.com/RNF-SI/tutos_atelier_si/issues>`_
+
 Récupération des fichiers
 -------------------------
 
