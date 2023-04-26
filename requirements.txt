@@ -1,0 +1,6 @@
+sphinx
+sphinx-copybutton
+sphinxcontrib-youtube
+sphinxcontrib-video
+sphinx-rtd-theme
+sphinx-autobuild
