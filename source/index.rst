@@ -13,12 +13,16 @@ Ils sont proposés par les membres de l'ateliers, dans le cadre d'une présentat
 Les dates et sujets des ateliers futurs peuvent être retrouvés sur `la page de l'atelier du portail RNF <https://www.portail.reserves-naturelles.org/page/1496002-systemes-d-information-en-reseau>`_.
 
 .. toctree::
- contribuer
- wsl_flask
- deployer_geonature
+   :maxdepth: 2
+
+   contribuer
+   wsl_flask
+   deployer_geonature
+   qgis_builder
 
 Contributeurs :
 ---------------
 
 * `Zacharie Moulin (RNF) <https://github.com/MoulinZ>`_
 * `Maxime Toma (LPO) <https://github.com/maximetoma>`_
+* `Colas Geier (CEN Isère) <https://github.com/cen-cgeier>`_
