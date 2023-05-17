@@ -8,10 +8,10 @@ Développer un module monitorings GeoNature (Atelier du 25 mai 2023)
 Le concept
 ----------
 
-Un sous-module monitoring est constitué de 2 format de fichiers pincipaux : le JSON et le SQL.
+Un sous-module monitoring est constitué de 2 formats de fichiers pincipaux : le JSON et le SQL.
 
 - JSON permet de créer la structure, le fonctionnement et l'articulation du module de suivi.
-- SQL permet de créer les vues dans votre base de données GéoNature afin de rappatrier les données dans la synthèse ou de définir un export au sein du sous module.
+- SQL permet de créer les vues dans votre base de données GeoNature afin de rappatrier les données dans la synthèse ou de définir un export au sein du sous module.
 
 Au sein du module Monitorings le terme ``site`` correspond à des entités géographiques.
 
@@ -72,7 +72,7 @@ Les différents fichiers :
 
 * ``config.json`` `Fichier de configuration du module qui définit l'arbre d'enchainement des formulaires et d'autres spécificités liés à la donnée.`
 * ``module.json`` `Fichier de configuration du module qui définit certains affichages (nom, description, couleur, export(s) disponible(s),...)`
-* ``site.json`` `Définit le formulaire de description des géométries (Point, LineString ou  Polygon). Jusqu'à présents, il n'est pas possible de définirs différentes géométries dans module de suivi (Exemple : Point ET Polygon impossible).`
+* ``site.json`` `Définit le formulaire de description des géométries (Point, LineString ou  Polygon). Jusqu'à présent, il n'est pas possible de définir différentes géométries dans module de suivi (Exemple : Point ET Polygon impossible). Egalement, il ne pas non plus possible de faire afficher ou de définir une géométrie dans un autre niveau que site.json.`
 * ``group_site.json`` `Définit le formulaire de regroupement des géométries.`
 * ``visit.json`` `Définit le formulaire du passage sur le lieu de la géométrie.`
 * ``observation.json`` `Définit le formulaire de description des espèces observées lors de la visite.`
@@ -296,7 +296,7 @@ Un certain nombre de champs sont obligatoires à renseigner dans chaque table de
 - **Les Sites** ``site.json``
     Champs obligatoires : base_site_name, geom
 
-    Ne pas oublier de renseigner le type de géométrie employer dans ce fichier.
+    Ne pas oublier de renseigner le type de géométrie employé dans ce fichier.
     Seul 1 type de géométrie peut-être renseigné par module. 
 
     .. code-block:: json
