@@ -1,7 +1,19 @@
 Développer un module monitorings GeoNature (Atelier du 25 mai 2023)
 ===================================================================
 
-| source `Création d'un sous-module <https://github.com/PnX-SI/gn_module_monitoring/blob/master/docs/sous_module.rst>`_ (Documentation officielle du module monitorings)
+| source `Dépot et installation (github PnX-SI) <https://github.com/PnX-SI/gn_module_monitoring>`_ (Documentation officielle)
+| source `Création d'un sous-module <https://github.com/PnX-SI/gn_module_monitoring/blob/master/docs/sous_module.rst>`_ (Documentation officielle)
+
+----------
+Le concept
+----------
+
+Un sous-module monitoring est constitué de 2 formats de fichiers pincipaux : le JSON et le SQL.
+
+- JSON permet de créer la structure, le fonctionnement et l'articulation du module de suivi.
+- SQL permet de créer les vues dans votre base de données GeoNature afin de rappatrier les données dans la synthèse ou de définir un export au sein du sous module.
+
+Au sein du module Monitorings le terme ``site`` correspond à des entités géographiques.
 
 --------------
 Fonctionnement
@@ -31,7 +43,7 @@ Nous verrons plus en détail ces niveaux dans la partie `Configuration des nivea
 Installer le module Monitorings
 -------------------------------
 
-1. Télécharger le projet à la racine de de l'utilisateur de votre GeoNatre (``cd``)
+1. Télécharger le projet à la racine de l'utilisateur de votre GeoNature (``cd``)
 
 ::
 
@@ -58,16 +70,16 @@ Vous pouvez cependant surcoucher vos propres configurations spécifiques pour vo
 
 Les différents fichiers : 
 
-* ``config.json`` `(configuration générale)`
-* ``module.json`` `(configuration du module)`
-* ``site.json`` `(configuration des sites)`
-* ``group_site.json`` `(configuration des groupes de sites)`
-* ``visit.json`` `(configuration des visites)`
-* ``observation.json`` `(configuration des observations)`
-* ``observation_detail.json`` `(configuration des détails des observations)`
-* ``nomenclature.json`` `(pour l'ajout de nomenclatures spécifiques au sous-module)`
-* ``synthese.sql`` `(vue pour la synchronisation avec la synthèse)`
-* ``img.jpg`` `(image/vignette qui apparaitra dans l'accueil de Monitoring)`
+* ``config.json`` `Fichier de configuration du module qui définit l'arbre d'enchainement des formulaires et d'autres spécificités liés à la donnée.`
+* ``module.json`` `Fichier de configuration du module qui définit certains affichages (nom, description, couleur, export(s) disponible(s),...)`
+* ``site.json`` `Définit le formulaire de description des géométries (Point, LineString ou  Polygon). Jusqu'à présent, il n'est pas possible de définir différentes géométries dans module de suivi (Exemple : Point ET Polygon impossible). Egalement, il ne pas non plus possible de faire afficher ou de définir une géométrie dans un autre niveau que site.json.`
+* ``group_site.json`` `Définit le formulaire de regroupement des géométries.`
+* ``visit.json`` `Définit le formulaire du passage sur le lieu de la géométrie.`
+* ``observation.json`` `Définit le formulaire de description des espèces observées lors de la visite.`
+* ``observation_detail.json`` `Définit le formulaire de description  des détails des observations`
+* ``nomenclature.json`` `Fichier permettant de définir et d'ajouter à la base de données des nomenclatures spécifiques au sous-module.`
+* ``synthese.sql`` `Définit la vue des données présentent dans le sous-module pour la synchronisation avec la synthèse.`
+* ``img.jpg`` `Image qui servira de vignette du sous-module sur la page d'accueil du module Monitorings. Le format paysage est à privilégier.`
 
 Configuration générale
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -89,7 +101,7 @@ Voici quelques exemples ci-dessous :
             "site": {
                 "visit": {
                     "observation": null
-                    },
+                    }
                 }
             }
         }
@@ -112,8 +124,8 @@ Voici quelques exemples ci-dessous :
                 "visit": {
                     "observation": {
                         "observation_detail": null
-                        },
-                    },
+                        }
+                    }
                 }
             }
         }
@@ -131,8 +143,8 @@ Voici quelques exemples ci-dessous :
                     "visit": {
                         "observation": {
                             "observation_detail": null
-                            },
-                        },
+                            }
+                        }
                     }
                 }
             }    
@@ -146,12 +158,16 @@ Voici quelques exemples ci-dessous :
     {
     "tree": {
         "module": {
+            "sites_group": {
+                "site": {
+                    "visit": {
+                        "observation": null
+                    }
+                }
+            },
             "site": {
                 "visit": {
-                    "observation": {
-                        "observation_detail": null
-                        },
-                    },
+                    "observation": null
                 }
             }
         }
@@ -280,7 +296,8 @@ Un certain nombre de champs sont obligatoires à renseigner dans chaque table de
 - **Les Sites** ``site.json``
     Champs obligatoires : base_site_name, geom
 
-    Ne pas oublier de renseigner le type de géométrie employer dans ce fichier
+    Ne pas oublier de renseigner le type de géométrie employé dans ce fichier.
+    Seul 1 type de géométrie peut-être renseigné par module. 
 
     .. code-block:: json
 
