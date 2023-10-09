@@ -1,6 +1,8 @@
 Développer un plugin Qgis (Atelier du 27 avril 2023)
 ====================================================
 
+..  youtube:: cGTKgTH-Vsk
+
 | source `geotribu <https://static.geotribu.fr/articles/2010/2010-09-23_creer_ses_propres_plugin_qgis/>`_ (un peu ancienne mais qui donne une trame)
 | source `docs.qgis <https://docs.qgis.org/3.28/fr/docs/pyqgis_developer_cookbook/plugins/plugins.html#getting-started>`_
 
