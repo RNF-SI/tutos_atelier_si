@@ -21,6 +21,7 @@ Les dates et sujets des ateliers futurs peuvent être retrouvés sur `la page de
    qgis_builder
    gn_monitoring
    qgis_reseau
+   si_rnf
 
 Contributeurs :
 ---------------
