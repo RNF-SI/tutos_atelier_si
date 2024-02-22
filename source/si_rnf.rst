@@ -1,6 +1,10 @@
-========================================================================
-Système d'Informations de Réserves Naturelles de France et son GeoNature
-========================================================================
+======================================================================================================
+Système d'Informations de Réserves Naturelles de France et son GeoNature (Atelier du 30 novembre 2023)
+======================================================================================================
+
+..  youtube:: 2rRe7gHJjYQ
+
+\
 
 Le système d'informations de Réserves Naturelles de France regroupe un ensemble d'applications mises à dispositions des membres et des partenaires de l'association. 
 Les diverses applications sont présentées sur la page https://plateformes.reserves-naturelles.org/ 
@@ -112,6 +116,8 @@ Le GeoNature de RNF
 ===================
 
 Utiliser l'instance GeoNature de RNF est possible pour tout gestionnaire de réserve naturelle. S'il est également gestionnaire d'autres espaces protégés, il peut naturellement gérer l'ensemble de ses données naturalistes sur notre instance. 
+
+Une condition est cependant essentielle pour l'instant : **être en France métropolitaine**. Malheuresement, le système de projection des données de notre GeoNature est le Lambert93. Je réfléchis cependant à déployer une instance pour les outre mer, si la demande existe. N'hésitez pas à me contacter si c'est le cas. 
 
 .. WARNING:: 
 
