@@ -25,6 +25,7 @@ Les dates et sujets des ateliers futurs peuvent être retrouvés sur `la page de
    ign
    tests
    qgis_geonature
+   proxmox
 
 Contributeurs :
 ---------------
