@@ -23,7 +23,8 @@ extensions = [
     "sphinx.ext.githubpages",
     "sphinx_copybutton",
     "sphinxcontrib.youtube",
-    "sphinxcontrib.video"
+    "sphinxcontrib.video",
+    'sphinxcontrib.pdfembed'
     ]
 
 templates_path = ['_templates']

@@ -20,11 +20,20 @@ Les dates et sujets des ateliers futurs peuvent être retrouvés sur `la page de
    deployer_geonature
    qgis_builder
    gn_monitoring
+
    intelligence-artificielle
+   qgis_reseau
+   si_rnf
+   ign
+   tests
+   qgis_geonature
+   proxmox
+
 
 Contributeurs :
 ---------------
 
 * `Zacharie Moulin (RNF) <https://github.com/MoulinZ>`_
-* `Maxime Toma (LPO) <https://github.com/maximetoma>`_
+* `Maxime Toma (LPO France) <https://github.com/maximetoma>`_
 * `Colas Geier (CEN Isère) <https://github.com/cen-cgeier>`_
+* Julien Girard-Claudon (LPO Auvergne-Rhône-Alpes)
