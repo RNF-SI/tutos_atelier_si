@@ -20,6 +20,7 @@ Les dates et sujets des ateliers futurs peuvent être retrouvés sur `la page de
    deployer_geonature
    qgis_builder
    gn_monitoring
+   intelligence-artificielle
 
 Contributeurs :
 ---------------

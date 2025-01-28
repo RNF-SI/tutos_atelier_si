@@ -49,7 +49,7 @@ ChatGPT :
 Alternatives à ChatGPT :
 ~~~~~~~~~~~~~~~~~~~~~~~~
 **Claude 2:**
-  * Anthropics: Ancien d'OPEN AI
+  * Anthropics: Anciens d'OPEN AI
   * Prend 100000 mots (25000 pour GPT-4)
   * Performances un peu moins bonnes sur des missions de dev comparables
   * Fine Tuné pour être plus politiquement correct (conventionnel AI)
