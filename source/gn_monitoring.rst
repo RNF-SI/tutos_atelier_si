@@ -1,6 +1,8 @@
 Développer un module monitorings GeoNature (Atelier du 25 mai 2023)
 ===================================================================
 
+..  youtube:: uCDwoqJMtGE 
+
 | source `Dépot et installation (github PnX-SI) <https://github.com/PnX-SI/gn_module_monitoring>`_ (Documentation officielle)
 | source `Création d'un sous-module <https://github.com/PnX-SI/gn_module_monitoring/blob/master/docs/sous_module.rst>`_ (Documentation officielle)
 
