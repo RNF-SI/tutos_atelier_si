@@ -130,4 +130,4 @@ dmypy.json
 
 # add settings file
 source/.vscode/settings.json
-.vscode/settings.json
+.vscode/
