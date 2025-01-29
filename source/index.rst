@@ -30,6 +30,7 @@ Les dates et sujets des ateliers futurs peuvent être retrouvés sur `la page de
    proxmox
    vs_code_optimisation
    cursor_integration
+   postman
 Contributeurs :
 ---------------
 
