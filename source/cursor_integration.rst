@@ -4,6 +4,8 @@
 Intégration de Cursor dans le Projet
 =====================================
 
+..  youtube:: TgS50tdTMTY
+
 Ce tutoriel explique comment utiliser l'éditeur **Cursor** pour bénéficier d'une assistance IA 
 adaptée à votre architecture Flutter/Dart, tout en vous présentant quelques raccourcis clavier utiles.
 Cursor est un fork de vscode.

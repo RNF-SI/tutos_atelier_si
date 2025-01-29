@@ -4,6 +4,8 @@
 Optimisations et Astuces pour VS Code
 ===========================================
 
+..  youtube:: TDshJ7Lfnxs
+
 Ce tutoriel explique comment optimiser votre environnement de développement 
 **VS Code**. Tout au long de ce guide, les exemples seront donnés pour un projet en **Dart** et **Flutter**, suivant les principes de **Clean Architecture**.
 

@@ -4,6 +4,8 @@
 Tutoriel : Optimiser son usage de Postman
 ===========================================
 
+..  youtube:: JxFEfWVY194
+
 Ce tutoriel explique comment mettre en place et organiser une collection **Postman** pour un projet tel que **GeoNature** (ou tout autre projet modulaire). Nous aborderons :
 
 - Les principes de classification et de convention de nommage des requêtes.
