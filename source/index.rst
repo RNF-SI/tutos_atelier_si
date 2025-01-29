@@ -20,12 +20,15 @@ Les dates et sujets des ateliers futurs peuvent être retrouvés sur `la page de
    deployer_geonature
    qgis_builder
    gn_monitoring
+
+   intelligence-artificielle
    qgis_reseau
    si_rnf
    ign
    tests
    qgis_geonature
    proxmox
+
 
 Contributeurs :
 ---------------
