@@ -28,12 +28,14 @@ Les dates et sujets des ateliers futurs peuvent être retrouvés sur `la page de
    tests
    qgis_geonature
    proxmox
-
-
+   vs_code_optimisation
+   cursor_integration
+   postman
 Contributeurs :
 ---------------
 
 * `Zacharie Moulin (RNF) <https://github.com/MoulinZ>`_
+* `Antoine Schlegel (RNF) <https://github.com/aschlegle>`_
 * `Maxime Toma (LPO France) <https://github.com/maximetoma>`_
 * `Colas Geier (CEN Isère) <https://github.com/cen-cgeier>`_
 * Julien Girard-Claudon (LPO Auvergne-Rhône-Alpes)
