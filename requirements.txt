@@ -29,3 +29,4 @@ sphinxcontrib-youtube==1.2.0
 typing-extensions==4.5.0
 urllib3==1.26.14
 zipp==3.14.0
+sphinxcontrib-pdfembed==0.1
