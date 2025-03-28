@@ -20,7 +20,6 @@ Les dates et sujets des ateliers futurs peuvent être retrouvés sur `la page de
    deployer_geonature
    qgis_builder
    gn_monitoring
-
    intelligence-artificielle
    qgis_reseau
    si_rnf
@@ -31,6 +30,8 @@ Les dates et sujets des ateliers futurs peuvent être retrouvés sur `la page de
    vs_code_optimisation
    cursor_integration
    postman
+   influxdb
+
 Contributeurs :
 ---------------
 

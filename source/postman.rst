@@ -138,5 +138,3 @@ Avec ces principes de **classification** (folders, noms explicites), ces **conve
 - Affiner la documentation de chaque requête existante (décrire le corps, les paramètres, la réponse).
 - Créer des tests automatisés (dans l’onglet **Tests**) pour valider le format de réponse ou le code HTTP.
 - Partager votre collection (et ses environnements) avec vos coéquipiers ou via un espace Team Postman.
-
-----
