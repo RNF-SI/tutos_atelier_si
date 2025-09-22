@@ -31,6 +31,7 @@ Les dates et sujets des ateliers futurs peuvent être retrouvés sur `la page de
    cursor_integration
    postman
    influxdb
+   gn_integration_bdd
 
 Contributeurs :
 ---------------
@@ -39,4 +40,5 @@ Contributeurs :
 * `Antoine Schlegel (RNF) <https://github.com/aschlegle>`_
 * `Maxime Toma (LPO France) <https://github.com/maximetoma>`_
 * `Colas Geier (CEN Isère) <https://github.com/cen-cgeier>`_
-* Julien Girard-Claudon (LPO Auvergne-Rhône-Alpes)
+* `Julien Girard-Claudon (LPO Auvergne-Rhône-Alpes) <https://github.com/lpojgc>`_
+* `Marie-Laure Séguin (CEN Normandie) <https://github.com/marie-laure-cen>`_
