@@ -1,5 +1,5 @@
 Intégrer des données dans Occtax et Monitoring (Atelier du 30 avril 2025)
-===================================================================
+=========================================================================
 
 ..  youtube:: RcVYcPHNZ_0 
     
@@ -463,16 +463,16 @@ La dernière étape consiste à modifier dans le projet qgis les valeurs de conn
 
 Par exemple :
 
-.. code-block:: txt
+.. code-block:: xml
 
     <layer-tree-layer providerKey="postgres" id="t_releves_occtax_1155bfde_cbb7_4910_82c5_3d0457100f82" source="dbname='geonature' host=127.0.0.1 port=5432 sslmode=allow authcfg=aaaa000 key='fid' estimatedmetadata=true srid=2154 type=Point checkPrimaryKeyUnicity='1' table=&quot;_qgis&quot;.&quot;import_data&quot; (geom_local) sql=&quot;id_occurrence_occtax&quot; IS NULL" expanded="0" legend_split_behavior="0" name="Observations (releve - occurrence - dénombrement)" patch_size="-1,-1" checked="Qt::Checked" legend_exp="">
 
 
 
 
---------------
+---------------------------------
 Import de données avec géométries
---------------
+---------------------------------
 
 Une fois les données intégrées dans la table _qgis.import_data, formatées et vérifiées, mettre à jour la valeur de la colonne ``import_valid`` en true.
 
@@ -835,9 +835,9 @@ Remarque : il est nécessaire de nettoyer les colonnes ``additional_fields`` de 
     ;
 
 
---------------
+---------------------------------
 Import de données sans géométries
---------------
+---------------------------------
 
 Pour les observations convernant un inventaire sur l'ensemble d'un site, un tableau excel a été proposé aux chargés de mission. Les observations sont ensuite rattachées à la géométrie du site en question, celui-ci ayant été au préalable intégré à ref_geo.l_areas et rattaché à un jeu de données.
 
@@ -872,9 +872,9 @@ La procédure est la même que ci-dessus mais en préalable, il faut récupérer
         AND date_import is null
 
 
---------------
+--------------------------------
 Procédure pour Monitoring
---------------
+--------------------------------
 
 La procédure pour Monitoring repose sur le même principe. Les changements concernent la récupération des identifiants :
 

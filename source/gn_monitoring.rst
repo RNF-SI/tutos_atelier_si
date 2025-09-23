@@ -304,9 +304,11 @@ Un certain nombre de champs sont obligatoires à renseigner dans chaque table de
     .. code-block:: json
 
         {
-        "geometry_type": "Point", # Point, LineString ou Polygon
+        "geometry_type": "Point",
         "display_properties": [
-        ...
+            "base_site_name",
+            "base_site_description"
+        ]
         }
 
 - **Les Visites** ``visit.json``
@@ -366,13 +368,18 @@ Pour définir ses propres variables (ou modifier des variables déjà présentes
 
   "geometry_type": "Point",
   "display_properties": [
-    ...
+    "base_site_name",
+    "base_site_description"
   ],
   "display_list": [
-    ...
+    "base_site_name"
   ],
   "specific": [
-    ...
+    {
+      "attribut_name": "example_field",
+      "type_widget": "text",
+      "attribut_label": "Exemple"
+    }
   ]
 
 - **Les différents types de variable**
@@ -388,7 +395,7 @@ Ci-dessous un résumé des types de champs possibles :
 
   .. code-block:: json
 
-      nom_contact": {
+      "nom_contact": {
           "type_widget": "text",
           "attribut_label": "Nom du contact"
       }
