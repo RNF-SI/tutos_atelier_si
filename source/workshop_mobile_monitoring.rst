@@ -420,14 +420,7 @@ Les 3 couches en détail
 Inversion de Dépendances (DIP)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: _static/workshop/dependency_inversion.png
-   :alt: Diagramme d'inversion de dépendances
-   :align: center
-   :width: 70%
-
-*Diagramme montrant le flux : UseCase → IRepository ← RepositoryImpl*
-
-**Problème** : Dépendance directe ❌
+**Problème** : Dépendance directe entre domain (UseCase) et data (RepositoryImpl)❌
 
 .. code-block:: text
 
@@ -448,60 +441,54 @@ Inversion de Dépendances (DIP)
 - ✅ Flexibilité (changer DB/API sans toucher au métier)
 - ✅ Maintenabilité (responsabilités claires)
 
-Exemple de code
-^^^^^^^^^^^^^^^
+.. container:: example-box
 
-.. image:: _static/workshop/flow_diagram_example.png
-   :alt: Flux complet d'une fonctionnalité
-   :align: center
-   :width: 100%
+   **Exemple de code**
 
-*Diagramme de séquence : Widget → ViewModel → UseCase → Repository → DataSource*
+   **Interface (Domain)** :
 
-**Interface (Domain)** :
-
-.. code-block:: dart
-
-   // lib/domain/repository/sites_repository.dart
-   abstract class SitesRepository {
-     Future<List<Site>> getSites();
-   }
-
-**Implémentation (Data)** :
-
-.. code-block:: dart
-
-   // lib/data/repository/sites_repository_impl.dart
-   class SitesRepositoryImpl implements SitesRepository {
-     final SitesApi _api;
-     final SitesDao _dao;
-
-     @override
-     Future<List<Site>> getSites() async {
-       try {
-         // API d'abord
-         final sites = await _api.fetchSites();
-         await _dao.saveSites(sites);
-         return sites;
-       } catch (e) {
-         // Fallback DB locale
-         return _dao.getSites();
-       }
-     }
-   }
-
-**Use Case (Domain)** :
-
-.. code-block:: dart
-
-   // lib/domain/usecase/get_sites_usecase.dart
-   @riverpod
-   class GetSitesUseCase extends _$GetSitesUseCase {
-     Future<List<Site>> call() async {
-       return ref.read(sitesRepositoryProvider).getSites();
-     }
-   }
-
+   .. code-block:: dart
+   
+      // lib/domain/repository/sites_repository.dart
+      abstract class SitesRepository {
+        Future<List<Site>> getSites();
+      }
+   
+   **Implémentation (Data)** :
+   
+   .. code-block:: dart
+   
+      // lib/data/repository/sites_repository_impl.dart
+      class SitesRepositoryImpl implements SitesRepository {
+        final SitesApi _api;
+        final SitesDao _dao;
+   
+        @override
+        Future<List<Site>> getSites() async {
+          try {
+            // API d'abord
+            final sites = await _api.fetchSites();
+            await _dao.saveSites(sites);
+            return sites;
+          } catch (e) {
+            // Fallback DB locale
+            return _dao.getSites();
+          }
+        }
+      }
+   
+   **Use Case (Domain)** :
+   
+   .. code-block:: dart
+   
+      // lib/domain/usecase/get_sites_usecase.dart
+      @riverpod
+      class GetSitesUseCase extends _$GetSitesUseCase {
+        Future<List<Site>> call() async {
+          return ref.read(sitesRepositoryProvider).getSites();
+        }
+      }
+   
 Partie 4 : Fonctionnalités à développer (20 min)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
