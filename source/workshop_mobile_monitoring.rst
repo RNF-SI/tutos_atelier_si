@@ -14,36 +14,33 @@ Introduction
 
 Ce workshop vise à former une dizaine de participants au développement mobile avec Flutter, dans le contexte de l'application **GN Mobile Monitoring** (application mobile pour le module monitoring de GeoNature).
 
-**Public** : Géomaticiens, développeurs Python, profils techniques variés
+.. container:: info-box
 
-**Prérequis** :
-- Connaissances de base en programmation
-- Git
-- Environnement Linux/macOS (ou WSL sur Windows)
+   **🎯 Public cible**
+   
+   Géomaticiens, développeurs Python, profils techniques variés cherchant à s'initier au développement mobile.
 
-**Format** :
-- Présentation : Atelier SI en réseau du 26 novembre 2025
-- Semaine de développement : 5 jours en groupe
+
 
 Informations pratiques
 ======================
 
-Date
-----
 
-Du 1er au 5 décembre 2025
+      Date et participants
+      --------------------
+      
+      .. list-table::
+         :widths: 30 70
+         
+         * - **📅 Dates**
+           - 1er au 5 décembre 2025
+         * - **👥 Participants**
+           - ~10 personnes maximum
+         * - **💬 Communication**
+           - https://matrix.to/#/!kFgKRPJSfydPQpWPOW:matrix.org?via=matrix.org
 
-Participants
-------------
+   
 
-~10 personnes
-
-Support technique
------------------
-
-- **Organisateur** : Antoine Schlegel
-- **Canal communication** : https://matrix.to/#/!kFgKRPJSfydPQpWPOW:matrix.org?via=matrix.org
-- **Points quotidiens** : Matins et soirs
 
 Objectifs pédagogiques
 =======================
@@ -154,93 +151,131 @@ Installation d'Android Studio
 Options de développement
 ------------------------
 
-Option 1 : Téléphone physique (recommandé)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. raw:: html
 
-**Activer le mode développeur sur Android** :
-
-1. Aller dans **Paramètres** → **À propos du téléphone**
-2. Taper 7 fois sur **Numéro de build**
-3. Retourner dans **Paramètres** → **Options pour développeurs**
-4. Activer :
-   - **Options pour développeurs**
-   - **Débogage USB**
-5. Connecter le téléphone par USB
-6. Autoriser le débogage USB sur le popup
-
-**Développer avec VS Code/Cursor** :
-
-1. Ouvrir le projet dans VS Code/Cursor
-2. Installer l'extension **Flutter** (Dart Code)
-3. En bas à droite, cliquer sur le device selector
-4. Sélectionner votre téléphone dans la liste
-5. Appuyer sur **F5** ou **Run → Start Debugging**
-
-Option 2 : Émulateur Android
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**Créer un émulateur dans Android Studio** :
-
-1. Ouvrir **Android Studio** → **Tools** → **AVD Manager**
-2. Cliquer sur **Create Virtual Device**
-3. Choisir un téléphone (ex: Pixel 6a)
-4. Choisir une image système (API 33 recommandé)
-5. Finaliser la configuration
-
-**Développer avec VS Code/Cursor** :
-
-1. Ouvrir le projet dans VS Code/Cursor
-2. Ouvrir la palette de commandes : **Ctrl+Shift+P** (ou **Cmd+Shift+P** sur Mac)
-3. Taper : **Flutter: Launch Emulator**
-4. Sélectionner l'émulateur créé
-5. Attendre le démarrage complet
-6. Appuyer sur **F5** pour lancer l'app en debug
+   <div class="dev-options-grid">
+      <div class="option-card recommended">
+         <div class="option-header">
+            <div class="option-icon">📱</div>
+            <h3>Option 1 : Téléphone physique</h3>
+            <span class="badge-recommended">Recommandé</span>
+         </div>
+         
+         <div class="option-content">
+            <div class="setup-step">
+               <h4>1️⃣ Activer le mode développeur</h4>
+               <ol>
+                  <li><strong>Paramètres</strong> → À propos du téléphone</li>
+                  <li>Taper <strong>7 fois</strong> sur "Numéro de build"</li>
+                  <li><strong>Paramètres</strong> → Options pour développeurs</li>
+                  <li>Activer : <strong>Débogage USB</strong></li>
+               </ol>
+            </div>
+            
+            <div class="setup-step">
+               <h4>2️⃣ Connecter et développer</h4>
+               <ol>
+                  <li>Connecter le téléphone par USB</li>
+                  <li>Autoriser le débogage sur le popup</li>
+                  <li>Dans VS Code : extension <strong>Flutter</strong></li>
+                  <li>Sélectionner le device en bas à droite</li>
+                  <li>Terminal : <code>adb reverse tcp:8000 tcp:8000</code></li>
+                  <li>Appuyer sur <strong>F5</strong> pour debugger</li>
+               </ol>
+            </div>
+         </div>
+      </div>
+      
+      <div class="option-card">
+         <div class="option-header">
+            <div class="option-icon">💻</div>
+            <h3>Option 2 : Émulateur Android</h3>
+            <span class="badge-alternative">Alternative</span>
+         </div>
+         
+         <div class="option-content">
+            <div class="setup-step">
+               <h4>1️⃣ Créer un émulateur</h4>
+               <ol>
+                  <li>Android Studio → <strong>AVD Manager</strong></li>
+                  <li><strong>Create Virtual Device</strong></li>
+                  <li>Choisir : Pixel 6a</li>
+                  <li>Image système : <strong>API 33</strong></li>
+               </ol>
+            </div>
+            
+            <div class="setup-step">
+               <h4>2️⃣ Lancer depuis VS Code</h4>
+               <ol>
+                  <li><strong>Ctrl+Shift+P</strong> (palette de commandes)</li>
+                  <li>Taper : <strong>Flutter: Launch Emulator</strong></li>
+                  <li>Sélectionner votre émulateur</li>
+                  <li>Attendre le démarrage</li>
+                  <li>Appuyer sur <strong>F5</strong> pour debugger</li>
+               </ol>
+            </div>
+         </div>
+      </div>
+   </div>
 
 .. tip::
-   VS Code/Cursor affiche automatiquement les devices disponibles dans la barre de statut en bas. 
-   Vous pouvez cliquer dessus pour changer rapidement de device.
+   💡 **Astuce** : Le device actif s'affiche dans la barre de statut VS Code (en bas à droite). 
+   Cliquez dessus pour changer rapidement !
 
 Installation du projet GN Mobile Monitoring
 -------------------------------------------
 
-**Cloner et configurer le projet** :
+**Repository** : https://github.com/RNF-SI/gn_mobile_monitoring.git
+
+Installation en 4 étapes
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
-   # 1. Clone
+   # 1. Cloner le projet
    git clone https://github.com/RNF-SI/gn_mobile_monitoring.git
    cd gn_mobile_monitoring
 
-   # 2. Dépendances
+   # 2. Installer les dépendances
    flutter pub get
 
-   # 3. Génération de code
+   # 3. Générer le code automatique (OBLIGATOIRE)
    make generate_code
 
-   # 4. Configuration serveur de test
-   cp .env.test.example .env.test
-   nano .env.test
-
-**Configuration .env.test** :
+**4. Lancer l'application** (2 options) :
 
 .. code-block:: bash
 
-   TEST_SERVER_URL=https://geonature-test.reservenaturelle.fr
-   TEST_USERNAME=participant_01
-   TEST_PASSWORD=motdepasse_secret
-   TEST_MODULES=POPAAMPHIBIEN,POPREPTILE
-
-**Premier lancement** :
-
-.. code-block:: bash
-
+   # Option A : Ligne de commande
    make run
 
-**Vérification** :
+.. code-block:: text
+
+   # Option B : VS Code/Cursor
+   Appuyer sur F5 ou Run → Start Debugging
+
+**✅ Succès** : L'app se lance avec l'écran de connexion
+
+**❌ Problème ?** : Relancez `make generate_code` puis relancez l'app
+
+Vérification optionnelle
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
+   # Tester que tout fonctionne
    make test-unit
+
+La plupart des tests doivent être verts. Si beaucoup échouent, demandez de l'aide.
+
+**En savoir plus** : Voir la section `Tests unitaires en Flutter`_ pour comprendre leur rôle.
+
+.. note::
+   **💡 make generate_code** : Cette commande génère le code pour Freezed (modèles), Drift (base de données) et Riverpod (state management). **Sans elle, l'app ne compile pas.**
+   
+   **Quand la relancer ?** Après chaque `git pull`, modification de modèle, ou si vous voyez des erreurs `.g.dart`.
+   
+   **Pour en savoir plus** : Voir `Librairies clés du projet`_ en annexe.
 
 Partie 3 : Visite guidée du code (30 min)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -255,29 +290,47 @@ Architecture Clean Architecture
 
 *Diagramme montrant les 3 couches concentriques : Domain (centre), Data (milieu), Presentation (extérieur)*
 
-**Les 3 couches** :
+.. container:: architecture-overview
 
-1. **💼 DOMAIN (Business Logic)**
+   .. container:: layer-card domain
+   
+      **💼 DOMAIN Layer**
+      
+      *Business Logic*
+      
+      • Modèles métier (Freezed)
+      • Cas d'usage
+      • Interfaces repository
+      • **100% indépendant**
+   
+   .. container:: layer-card data
+   
+      **🔧 DATA Layer**
+      
+      *Technical Implementation*
+      
+      • API REST (Dio)
+      • SQLite (Drift)
+      • Implémentations
+      • Mappers Entity ↔ Model
+   
+   .. container:: layer-card presentation
+   
+      **🎨 PRESENTATION Layer**
+      
+      *User Interface*
+      
+      • Écrans Flutter
+      • State (Riverpod)
+      • Widgets UI
+      • Navigation
 
-   - ``lib/domain/model/`` : Modèles métier (Freezed)
-   - ``lib/domain/usecase/`` : Cas d'usage métier
-   - ``lib/domain/repository/`` : Interfaces
-   - **Indépendant** de toute technologie
-
-2. **🔧 DATA (Technical Details)**
-
-   - ``lib/data/datasource/api/`` : API REST (Dio)
-   - ``lib/data/datasource/database/`` : Base de données (Drift/SQLite)
-   - ``lib/data/repository/`` : Implémentations
-   - ``lib/data/mapper/`` : Conversions Entity ↔ Model
-
-3. **🎨 PRESENTATION (UI)**
-
-   - ``lib/presentation/view/`` : Écrans et pages
-   - ``lib/presentation/viewmodel/`` : State management (Riverpod)
-   - ``lib/presentation/widgets/`` : Widgets réutilisables
-
-**Principe fondamental** : Direction des dépendances **Extérieur → Intérieur**
+.. admonition:: 💡 Principe fondamental
+   :class: key-point
+   
+   Direction des dépendances : **Extérieur → Intérieur**
+   
+   Le Domain ne dépend de RIEN !
 
 .. note::
    Le Domain ne dépend de RIEN. C'est le cœur de l'application, complètement indépendant des frameworks et technologies.
@@ -370,6 +423,10 @@ Exemple de code
 Partie 4 : Fonctionnalités à développer (20 min)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. raw:: html
+
+   <div class="section-separator"></div>
+
 6 fonctionnalités proposées
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -378,70 +435,87 @@ Partie 4 : Fonctionnalités à développer (20 min)
    :align: center
    :width: 100%
 
-*Aperçu visuel des 6 fonctionnalités à implémenter*
+.. raw:: html
 
-1. **🗺️ Carte interactive** (🟡 Moyen) - 2-3 personnes
-
-   - Afficher les sites sur une carte OpenStreetMap
-   - Marqueurs cliquables
-   - Support offline
-   - Bibliothèque : ``flutter_map``
-
-   .. image:: _static/workshop/feature_map.png
-      :alt: Exemple carte interactive
-      :width: 45%
-
-2. **📊 Export CSV** (🟢 Facile) - 1-2 personnes
-
-   - Exporter observations en CSV
-   - Partage du fichier
-   - Colonnes : id, date, espèce, observateur, lat, lon, commentaire
-
-   .. image:: _static/workshop/feature_csv.png
-      :alt: Exemple export CSV
-      :width: 45%
-
-3. **🔍 Filtres avancés** (🟡 Moyen) - 2-3 personnes
-
-   - Filtrer par date, module, statut sync, observateur
-   - Filtres combinables
-   - Persistance des filtres
-
-   .. image:: _static/workshop/feature_filters.png
-      :alt: Exemple filtres avancés
-      :width: 45%
-
-4. **📈 Graphiques statistiques** (🟡 Moyen) - 2-3 personnes
-
-   - Bar chart : observations par module
-   - Line chart : évolution temporelle
-   - Pie chart : top 5 espèces
-   - Bibliothèque : ``fl_chart``
-
-   .. image:: _static/workshop/feature_charts.png
-      :alt: Exemples de graphiques
-      :width: 60%
-
-5. **🎨 Dark Mode** (🟢-🟡 Facile/Moyen) - 1-2 personnes
-
-   - Thème dark
-   - Switch light/dark/system
-   - Persistance du choix
-
-   .. image:: _static/workshop/feature_darkmode.png
-      :alt: Comparaison light/dark mode
-      :width: 70%
-
-6. **🔧 Mode offline amélioré** (🔴 Complexe) - 2-3 personnes
-
-   - Indicateur online/offline
-   - Badge sur éléments non synchronisés
-   - Sync en arrière-plan
-   - Gestion des conflits
-
-   .. image:: _static/workshop/feature_offline.png
-      :alt: Indicateurs offline et sync
-      :width: 60%
+   <div class="features-grid">
+      <div class="feature-card">
+         <div class="feature-icon">🗺️</div>
+         <h3>Carte interactive</h3>
+         <div class="feature-level medium">🟡 Moyen</div>
+         <p><strong>Équipe :</strong> 2-3 personnes</p>
+         <ul>
+            <li>Carte OpenStreetMap</li>
+            <li>Marqueurs cliquables</li>
+            <li>Support offline</li>
+            <li>Package : <code>flutter_map</code></li>
+         </ul>
+      </div>
+      
+      <div class="feature-card">
+         <div class="feature-icon">📊</div>
+         <h3>Export CSV</h3>
+         <div class="feature-level easy">🟢 Facile</div>
+         <p><strong>Équipe :</strong> 1-2 personnes</p>
+         <ul>
+            <li>Export observations</li>
+            <li>Partage de fichier</li>
+            <li>Format CSV standard</li>
+            <li>Package : <code>csv</code></li>
+         </ul>
+      </div>
+      
+      <div class="feature-card">
+         <div class="feature-icon">🔍</div>
+         <h3>Filtres avancés</h3>
+         <div class="feature-level medium">🟡 Moyen</div>
+         <p><strong>Équipe :</strong> 2-3 personnes</p>
+         <ul>
+            <li>Filtres par date/module</li>
+            <li>Statut synchronisation</li>
+            <li>Filtres combinables</li>
+            <li>Persistance locale</li>
+         </ul>
+      </div>
+      
+      <div class="feature-card">
+         <div class="feature-icon">📈</div>
+         <h3>Graphiques stats</h3>
+         <div class="feature-level medium">🟡 Moyen</div>
+         <p><strong>Équipe :</strong> 2-3 personnes</p>
+         <ul>
+            <li>Charts interactifs</li>
+            <li>Évolution temporelle</li>
+            <li>Top espèces</li>
+            <li>Package : <code>fl_chart</code></li>
+         </ul>
+      </div>
+      
+      <div class="feature-card">
+         <div class="feature-icon">🎨</div>
+         <h3>Dark Mode</h3>
+         <div class="feature-level easy">🟢 Facile</div>
+         <p><strong>Équipe :</strong> 1-2 personnes</p>
+         <ul>
+            <li>Thème sombre</li>
+            <li>Switch light/dark/auto</li>
+            <li>Persistance du choix</li>
+            <li>Variables de thème</li>
+         </ul>
+      </div>
+      
+      <div class="feature-card">
+         <div class="feature-icon">🔧</div>
+         <h3>Mode offline++</h3>
+         <div class="feature-level hard">🔴 Complexe</div>
+         <p><strong>Équipe :</strong> 2-3 personnes</p>
+         <ul>
+            <li>Indicateur réseau</li>
+            <li>Queue de sync</li>
+            <li>Gestion conflits</li>
+            <li>Sync arrière-plan</li>
+         </ul>
+      </div>
+   </div>
 
 Partie 5 : Ressources et support (10 min)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -863,8 +937,21 @@ Où placer la logique métier ?
      }
    }
 
-Tests
------
+Tests unitaires en Flutter
+===========================
+
+.. raw:: html
+
+   <div class="section-separator"></div>
+
+.. container:: info-box
+
+   **🎯 Pourquoi les tests unitaires ?**
+   
+   Dans Clean Architecture, les tests unitaires sont essentiels pour valider que votre **logique métier** fonctionne correctement, indépendamment de l'interface utilisateur ou des services externes.
+
+Introduction à la pyramide des tests
+------------------------------------
 
 .. image:: _static/workshop/testing_pyramid.png
    :alt: Pyramide des tests
@@ -873,12 +960,513 @@ Tests
 
 *Pyramide des tests : Tests unitaires (base large) → Tests d'intégration (milieu) → Tests E2E (sommet)*
 
-Tests unitaires
-~~~~~~~~~~~~~~~
+.. container:: architecture-overview
+
+   .. container:: layer-card domain
+   
+      **🧪 Tests unitaires**
+      
+      *70% de vos tests*
+      
+      • Rapides (< 1 seconde)
+      • Isolés (pas de dépendances)
+      • Testent la logique métier
+      • **Domain Layer seulement**
+   
+   .. container:: layer-card data
+   
+      **🔗 Tests d'intégration**
+      
+      *20% de vos tests*
+      
+      • Plus lents (quelques secondes)
+      • Testent les interactions
+      • API + Database + Cache
+      • **Data Layer principalement**
+   
+   .. container:: layer-card presentation
+   
+      **📱 Tests E2E**
+      
+      *10% de vos tests*
+      
+      • Très lents (minutes)
+      • Interface complète
+      • Parcours utilisateur
+      • **Toute l'application**
+
+Que tester avec les tests unitaires ?
+-------------------------------------
+
+Dans le contexte GN Mobile Monitoring
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. admonition:: ✅ À TESTER (Domain Layer)
+   :class: key-point
+   
+   **Use Cases** : La logique métier pure
+   
+   • Validation des observations (dates, coordonnées)
+   • Calculs de distances ou surfaces
+   • Règles de compatibilité entre modules
+   • Transformation et filtrage des données
+   
+   **Modèles** : Les objets métier
+   
+   • Sérialisation/désérialisation JSON
+   • Méthodes `copyWith()` générées par Freezed
+   • Égalité et hashCode
+   • Getters calculés et validation
+   
+   **Value Objects** : Objets métier immutables
+   
+   • Coordonnées GPS, Email, ID utilisateur
+   • Validation à la création
+   • Comportements métier spécifiques
+
+.. admonition:: ❌ À NE PAS TESTER (en unitaire)
+   :class: warning
+   
+   **Évitez de tester** :
+   
+   • Widgets Flutter (→ Tests de widgets séparés)
+   • Appels API HTTP (→ Tests d'intégration)
+   • Base de données SQLite (→ Tests d'intégration)  
+   • Navigation entre écrans (→ Tests E2E)
+   • Providers Riverpod (→ Tests d'intégration)
+
+Configuration des tests dans le projet
+--------------------------------------
+
+Structure des tests
+~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: text
+
+   test/
+   ├── unit/
+   │   ├── domain/
+   │   │   ├── model/
+   │   │   │   └── observation_test.dart
+   │   │   └── usecase/
+   │   │       └── validate_observation_test.dart
+   │   └── data/
+   │       └── mapper/
+   │           └── observation_mapper_test.dart
+   ├── integration/
+   │   └── api/
+   │       └── sites_api_test.dart
+   └── test_helpers/
+       ├── mock_providers.dart
+       └── test_data.dart
+
+Commandes utiles
+~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+   # Lancer tous les tests unitaires
+   make test-unit
+   # ou
+   flutter test test/unit/
+
+   # Lancer un test spécifique
+   flutter test test/unit/domain/usecase/validate_observation_test.dart
+
+   # Tests avec couverture de code
+   flutter test --coverage
+
+   # Tests en mode watch (relance automatique)
+   flutter test --watch
+
+Exemples de tests concrets
+--------------------------
+
+Test d'un Use Case avec mocks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Objectif** : Tester la logique métier de façon isolée, sans dépendances externes.
 
-**Exemple** :
+.. code-block:: dart
+   :linenos:
+   :emphasize-lines: 14, 22-23
+   :caption: test/unit/domain/usecase/validate_observation_test.dart
+
+   import 'package:flutter_test/flutter_test.dart';
+   import 'package:mockito/mockito.dart';
+
+   void main() {
+     group('ValidateObservationUseCase', () {
+       late ValidateObservationUseCase useCase;
+
+       setUp(() {
+         useCase = ValidateObservationUseCase();
+       });
+
+       test('should reject future date', () async {
+         // Arrange
+         final futureObs = Observation(
+           id: '1',
+           date: DateTime.now().add(Duration(days: 1)), // ← Date future
+           latitude: 45.0,
+           longitude: 5.0,
+         );
+
+         // Act
+         final result = await useCase.call(futureObs);
+
+         // Assert
+         expect(result.isValid, false);
+         expect(result.error, contains('Date future'));
+       });
+
+       test('should reject missing coordinates', () async {
+         // Arrange
+         final invalidObs = Observation(
+           id: '2',
+           date: DateTime.now(),
+           latitude: null, // ← Coordonnées manquantes
+           longitude: null,
+         );
+
+         // Act
+         final result = await useCase.call(invalidObs);
+
+         // Assert
+         expect(result.isValid, false);
+         expect(result.error, contains('Coordonnées'));
+       });
+
+       test('should accept valid observation', () async {
+         // Arrange
+         final validObs = Observation(
+           id: '3',
+           date: DateTime.now(),
+           latitude: 45.0,
+           longitude: 5.0,
+         );
+
+         // Act
+         final result = await useCase.call(validObs);
+
+         // Assert
+         expect(result.isValid, true);
+         expect(result.error, isNull);
+       });
+     });
+   }
+
+Test d'un modèle Freezed
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: dart
+   :linenos:
+   :caption: test/unit/domain/model/observation_test.dart
+
+   import 'dart:convert';
+   import 'package:flutter_test/flutter_test.dart';
+
+   void main() {
+     group('Observation Model', () {
+       const testObservation = Observation(
+         id: '123',
+         date: '2023-12-01T10:30:00Z',
+         species: 'Salamandre tachetée',
+         latitude: 45.123,
+         longitude: 5.456,
+       );
+
+       test('should serialize to JSON correctly', () {
+         // Act
+         final json = testObservation.toJson();
+
+         // Assert
+         expect(json['id'], '123');
+         expect(json['species'], 'Salamandre tachetée');
+         expect(json['latitude'], 45.123);
+       });
+
+       test('should deserialize from JSON correctly', () {
+         // Arrange
+         final jsonString = '''
+         {
+           "id": "456",
+           "date": "2023-12-02T14:15:00Z",
+           "species": "Triton palmé",
+           "latitude": 46.0,
+           "longitude": 6.0
+         }
+         ''';
+
+         // Act
+         final observation = Observation.fromJson(
+           jsonDecode(jsonString)
+         );
+
+         // Assert
+         expect(observation.id, '456');
+         expect(observation.species, 'Triton palmé');
+         expect(observation.latitude, 46.0);
+       });
+
+       test('copyWith should work correctly', () {
+         // Act
+         final modified = testObservation.copyWith(
+           species: 'Triton crêté',
+           latitude: 47.0,
+         );
+
+         // Assert
+         expect(modified.id, '123'); // ← Inchangé
+         expect(modified.species, 'Triton crêté'); // ← Modifié
+         expect(modified.latitude, 47.0); // ← Modifié
+         expect(modified.longitude, 5.456); // ← Inchangé
+       });
+
+       test('equality should work correctly', () {
+         // Arrange
+         const identical = Observation(
+           id: '123',
+           date: '2023-12-01T10:30:00Z',
+           species: 'Salamandre tachetée',
+           latitude: 45.123,
+           longitude: 5.456,
+         );
+
+         const different = Observation(
+           id: '999',
+           date: '2023-12-01T10:30:00Z',
+           species: 'Salamandre tachetée',
+           latitude: 45.123,
+           longitude: 5.456,
+         );
+
+         // Assert
+         expect(testObservation, equals(identical));
+         expect(testObservation, isNot(equals(different)));
+       });
+     });
+   }
+
+Test d'un Repository avec mocks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: dart
+   :linenos:
+   :emphasize-lines: 8, 18, 27
+   :caption: test/unit/domain/usecase/get_sites_test.dart
+
+   import 'package:flutter_test/flutter_test.dart';
+   import 'package:mockito/mockito.dart';
+   import 'package:mockito/annotations.dart';
+
+   // Génère automatiquement MockSitesRepository
+   @GenerateMocks([SitesRepository])
+   void main() {
+     late MockSitesRepository mockRepository;
+     late GetSitesUseCase useCase;
+
+     setUp(() {
+       mockRepository = MockSitesRepository();
+       useCase = GetSitesUseCase(mockRepository);
+     });
+
+     group('GetSitesUseCase', () {
+       test('should return sites from repository', () async {
+         // Arrange - Mock du comportement
+         final expectedSites = [
+           Site(id: 1, name: 'Site A', coordinates: [45.0, 5.0]),
+           Site(id: 2, name: 'Site B', coordinates: [46.0, 6.0]),
+         ];
+         when(mockRepository.getSites('POPAAMPHIBIEN'))
+             .thenAnswer((_) async => expectedSites);
+
+         // Act
+         final result = await useCase.call('POPAAMPHIBIEN');
+
+         // Assert
+         expect(result, expectedSites);
+         verify(mockRepository.getSites('POPAAMPHIBIEN')).called(1);
+       });
+
+       test('should handle repository error', () async {
+         // Arrange
+         when(mockRepository.getSites(any))
+             .thenThrow(Exception('Network error'));
+
+         // Act & Assert
+         expect(
+           () => useCase.call('POPAAMPHIBIEN'),
+           throwsA(isA<Exception>()),
+         );
+       });
+     });
+   }
+
+Bonnes pratiques pour les tests
+-------------------------------
+
+Structure AAA (Arrange-Act-Assert)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. admonition:: 📝 Pattern AAA
+   :class: key-point
+   
+   **Arrange** : Préparer les données et mocks
+   
+   **Act** : Exécuter la fonction à tester
+   
+   **Assert** : Vérifier le résultat attendu
+
+.. code-block:: dart
+
+   test('should calculate distance correctly', () {
+     // Arrange ← 🔧 Préparation
+     final pointA = Coordinate(45.0, 5.0);
+     final pointB = Coordinate(45.1, 5.1);
+     
+     // Act ← ⚡ Exécution
+     final distance = calculateDistance(pointA, pointB);
+     
+     // Assert ← ✅ Vérification
+     expect(distance, closeTo(15.7, 0.1)); // ~15.7km ± 0.1
+   });
+
+Nommage des tests
+~~~~~~~~~~~~~~~~
+
+.. code-block:: dart
+
+   // ✅ BON - Décrit le comportement
+   test('should return empty list when no observations found')
+   test('should throw exception when user is not authenticated')
+   test('should validate email format correctly')
+
+   // ❌ MAUVAIS - Trop vague
+   test('test login')
+   test('check email') 
+   test('repository test')
+
+Gestion des mocks
+~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+   # Générer automatiquement les mocks
+   flutter packages pub run build_runner build
+
+.. code-block:: dart
+
+   // Dans le fichier de test
+   @GenerateMocks([
+     SitesRepository,
+     AuthRepository, 
+     DatabaseProvider,
+   ])
+
+Couverture de code
+~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+   # Générer un rapport de couverture
+   flutter test --coverage
+   
+   # Voir le rapport dans un navigateur
+   genhtml coverage/lcov.info -o coverage/html
+   open coverage/html/index.html
+
+.. tip::
+   🎯 **Objectif couverture** : Visez 80%+ pour le Domain Layer, moins critique pour Presentation/Data.
+
+Debugging des tests
+~~~~~~~~~~~~~~~~~~
+
+.. code-block:: dart
+
+   test('debug example', () async {
+     // Afficher des valeurs pendant le test
+     print('Value: $result');
+     
+     // Débugger avec le debugger
+     debugger(); // Pause ici si lancé avec --enable-vm-service
+     
+     expect(result, isNotNull);
+   });
+
+.. code-block:: bash
+
+   # Lancer les tests avec debug
+   flutter test --enable-vm-service test/unit/specific_test.dart
+
+Intégration dans le workflow de développement
+--------------------------------------------
+
+TDD (Test-Driven Development)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. admonition:: 🔄 Cycle TDD
+   :class: key-point
+   
+   1. **🔴 RED** : Écrire un test qui échoue
+   2. **🟢 GREEN** : Écrire le minimum de code pour passer le test  
+   3. **🔵 REFACTOR** : Améliorer le code tout en gardant les tests verts
+
+.. code-block:: dart
+
+   // 1. RED - Test qui échoue
+   test('should calculate tax correctly', () {
+     final calculator = TaxCalculator();
+     expect(calculator.calculate(100), 20.0); // 20% TVA
+   }); // ← Classe TaxCalculator n'existe pas encore
+
+   // 2. GREEN - Code minimal qui marche
+   class TaxCalculator {
+     double calculate(double amount) => amount * 0.2;
+   }
+
+   // 3. REFACTOR - Améliorer sans casser
+   class TaxCalculator {
+     final double _taxRate;
+     TaxCalculator(this._taxRate);
+     
+     double calculate(double amount) {
+       if (amount < 0) throw ArgumentError('Amount cannot be negative');
+       return amount * _taxRate;
+     }
+   }
+
+Hooks Git (pre-commit)
+~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+   # .git/hooks/pre-commit
+   #!/bin/sh
+   echo "Running unit tests..."
+   flutter test test/unit/ || exit 1
+   echo "All tests passed!"
+
+CI/CD Integration
+~~~~~~~~~~~~~~~~
+
+.. code-block:: yaml
+
+   # .github/workflows/test.yml
+   name: Tests
+   on: [push, pull_request]
+   
+   jobs:
+     test:
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v3
+         - uses: subosito/flutter-action@v2
+         - run: flutter pub get
+         - run: make generate_code
+         - run: flutter test test/unit/
+         - run: flutter test --coverage
+         - uses: codecov/codecov-action@v3
 
 .. code-block:: dart
 
@@ -1051,9 +1639,7 @@ Make (shortcuts du projet)
 .. code-block:: bash
 
    make run                # Lancer l'app
-   make test-unit          # Tests unitaires
-   make test-integration   # Tests d'intégration
-   make test-all           # Tous les tests
+   make test-unit          # Tests unitaires seulement
    make format             # Formater le code
    make analyze            # Analyser le code
    make generate_code      # Générer code (Freezed, Drift)
@@ -1204,6 +1790,11 @@ Outils
 Annexes
 =======
 
+.. raw:: html
+
+   <div class="section-separator"></div>
+   <div class="annexes">
+
 Checklist préparation
 ---------------------
 
@@ -1247,6 +1838,415 @@ Critères de succès
    ☐ Démos réussies le vendredi
    ☐ Feedback positif des participants
    ☐ Au moins 80% des participants se sentent capables de continuer à contribuer
+
+Librairies clés du projet
+--------------------------
+
+Cette section détaille les librairies essentielles qui nécessitent la génération de code.
+
+Dio - Client HTTP
+~~~~~~~~~~~~~~~~~
+
+**Qu'est-ce que c'est ?**
+
+Dio est un client HTTP puissant pour Dart qui gère les requêtes réseau vers l'API GeoNature.
+
+**Pourquoi l'utiliser ?**
+
+.. container:: architecture-overview
+
+   .. container:: layer-card data
+   
+      **✅ Avantages**
+      
+      • **Intercepteurs** : Gestion automatique des tokens, logs
+      • **Gestion d'erreurs** : Retry automatique, timeout
+      • **Upload/Download** : Progress, annulation
+      • **Offline** : Cache et synchronisation différée
+
+**Exemple concret dans le projet :**
+
+.. code-block:: dart
+   :linenos:
+   :caption: lib/data/datasource/geonature_api_client.dart
+
+   @riverpod
+   Dio geoNatureApiClient(GeoNatureApiClientRef ref) {
+     final dio = Dio(BaseOptions(
+       baseUrl: 'https://api.geonature.fr',
+       connectTimeout: Duration(seconds: 10),
+       receiveTimeout: Duration(seconds: 30),
+     ));
+
+     // Intercepteur pour les tokens
+     dio.interceptors.add(InterceptorsWrapper(
+       onRequest: (options, handler) async {
+         final token = await storage.getToken();
+         if (token != null) {
+           options.headers['Authorization'] = 'Bearer $token';
+         }
+         handler.next(options);
+       },
+       onError: (error, handler) {
+         if (error.response?.statusCode == 401) {
+           // Token expiré, rediriger vers login
+           ref.read(authViewModelProvider.notifier).logout();
+         }
+         handler.next(error);
+       },
+     ));
+
+     return dio;
+   }
+
+**Utilisation pratique :**
+
+.. code-block:: dart
+
+   final apiClient = ref.read(geoNatureApiClientProvider);
+   
+   // GET - Récupérer les observations
+   final response = await apiClient.get('/monitoring/observations');
+   final observations = response.data;
+   
+   // POST - Créer une observation
+   await apiClient.post('/monitoring/observations', data: {
+     'date': observation.date.toIso8601String(),
+     'species_id': observation.speciesId,
+     'coordinates': [observation.longitude, observation.latitude],
+   });
+   
+   // Upload avec progress
+   await apiClient.post('/upload', data: FormData.fromMap({
+     'file': await MultipartFile.fromFile(imagePath),
+   }), onSendProgress: (sent, total) {
+     print('Progress: ${(sent / total * 100).toStringAsFixed(1)}%');
+   });
+
+Freezed - Modèles immutables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Qu'est-ce que c'est ?**
+
+Freezed est une librairie qui génère automatiquement des classes **immutables** avec toutes les méthodes utiles (copyWith, toString, equality, hashCode, JSON serialization).
+
+**Pourquoi l'utiliser ?**
+
+.. container:: architecture-overview
+
+   .. container:: layer-card domain
+   
+      **✅ Avantages**
+      
+      • **Immutabilité** : Objets non modifiables
+      • **Type safety** : Détection d'erreurs à la compilation
+      • **Moins de boilerplate** : Code généré automatiquement
+      • **JSON support** : Sérialisation automatique
+
+**Exemple concret dans le projet :**
+
+.. code-block:: dart
+   :linenos:
+   :caption: lib/domain/model/observation.dart
+
+   @freezed
+   class Observation with _$Observation {
+     const factory Observation({
+       required String id,
+       required DateTime date,
+       required double latitude,
+       required double longitude,
+       String? species,
+       String? comment,
+     }) = _Observation;
+
+     factory Observation.fromJson(Map<String, dynamic> json) =>
+         _$ObservationFromJson(json);
+   }
+
+**Code généré automatiquement :**
+
+.. code-block:: dart
+
+   // Dans observation.freezed.dart (généré)
+   extension ObservationMethods on Observation {
+     // Copie avec modifications
+     Observation copyWith({
+       String? id,
+       DateTime? date,
+       String? species,
+       // ... autres champs
+     });
+     
+     // Conversion JSON
+     Map<String, dynamic> toJson();
+     
+     // Égalité et hashCode automatiques
+     @override
+     bool operator ==(Object other);
+     
+     @override
+     int get hashCode;
+   }
+
+**Utilisation pratique :**
+
+.. code-block:: dart
+
+   // Créer une observation
+   final obs = Observation(
+     id: '123',
+     date: DateTime.now(),
+     latitude: 45.0,
+     longitude: 5.0,
+   );
+
+   // Modifier (crée une nouvelle instance)
+   final modifiedObs = obs.copyWith(
+     species: 'Salamandre tachetée',
+     comment: 'Observée sous un rocher',
+   );
+
+   // JSON
+   final json = obs.toJson(); // Map<String, dynamic>
+   final fromJson = Observation.fromJson(json); // Observation
+
+Drift - Base de données SQLite
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Qu'est-ce que c'est ?**
+
+Drift est un ORM (Object-Relational Mapping) pour SQLite qui génère du code type-safe pour les requêtes de base de données.
+
+**Pourquoi l'utiliser ?**
+
+.. container:: architecture-overview
+
+   .. container:: layer-card data
+   
+      **✅ Avantages**
+      
+      • **Type safety** : Requêtes vérifiées à la compilation
+      • **Performance** : Requêtes compilées et optimisées
+      • **Offline-first** : SQLite embarqué dans l'app
+      • **Migration** : Gestion automatique des changements de schéma
+
+**Exemple concret dans le projet :**
+
+.. code-block:: dart
+   :linenos:
+   :caption: lib/data/database/tables/observations_table.dart
+
+   class Observations extends Table {
+     TextColumn get id => text()();
+     DateTimeColumn get date => dateTime()();
+     RealColumn get latitude => real()();
+     RealColumn get longitude => real()();
+     TextColumn get species => text().nullable()();
+     TextColumn get comment => text().nullable()();
+     BoolColumn get isSynced => boolean().withDefault(const Constant(false))();
+
+     @override
+     Set<Column> get primaryKey => {id};
+   }
+
+**DAO généré automatiquement :**
+
+.. code-block:: dart
+   :linenos:
+   :caption: lib/data/database/dao/observations_dao.dart
+
+   @DriftAccessor(tables: [Observations])
+   class ObservationsDao extends DatabaseAccessor<AppDatabase>
+       with _$ObservationsDaoMixin {
+     
+     ObservationsDao(AppDatabase db) : super(db);
+
+     // Requêtes générées automatiquement
+     Future<List<Observation>> getAllObservations() => 
+         select(observations).get();
+
+     Future<List<Observation>> getUnsyncedObservations() =>
+         (select(observations)..where((o) => o.isSynced.equals(false))).get();
+
+     Future<void> insertObservation(ObservationsCompanion observation) =>
+         into(observations).insert(observation);
+
+     Future<void> markAsSynced(String id) =>
+         (update(observations)..where((o) => o.id.equals(id)))
+             .write(ObservationsCompanion(isSynced: Value(true)));
+   }
+
+**Utilisation pratique :**
+
+.. code-block:: dart
+
+   final dao = database.observationsDao;
+
+   // Insérer une observation
+   await dao.insertObservation(
+     ObservationsCompanion(
+       id: Value('obs_123'),
+       date: Value(DateTime.now()),
+       latitude: Value(45.0),
+       longitude: Value(5.0),
+       species: Value('Salamandre tachetée'),
+     ),
+   );
+
+   // Récupérer les observations non synchronisées
+   final unsynced = await dao.getUnsyncedObservations();
+
+   // Marquer comme synchronisée
+   await dao.markAsSynced('obs_123');
+
+Riverpod - State Management
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Qu'est-ce que c'est ?**
+
+Riverpod est une librairie de gestion d'état qui utilise la génération de code pour créer des providers type-safe et performants.
+
+**Pourquoi l'utiliser ?**
+
+.. container:: architecture-overview
+
+   .. container:: layer-card presentation
+   
+      **✅ Avantages**
+      
+      • **Type safety** : Providers typés automatiquement
+      • **Performance** : Recalcul uniquement si nécessaire
+      • **Testabilité** : Facile à mocker et tester
+      • **Developer Experience** : Auto-complétion parfaite
+
+**Exemple concret dans le projet :**
+
+.. code-block:: dart
+   :linenos:
+   :caption: lib/presentation/viewmodel/observations_viewmodel.dart
+
+   @riverpod
+   class ObservationsViewModel extends _$ObservationsViewModel {
+     @override
+     Future<List<Observation>> build() async {
+       // Récupérer les observations depuis le repository
+       final repository = ref.read(observationsRepositoryProvider);
+       return repository.getObservations();
+     }
+
+     Future<void> addObservation(Observation observation) async {
+       // Mettre l'état en loading
+       state = const AsyncLoading();
+       
+       try {
+         final repository = ref.read(observationsRepositoryProvider);
+         await repository.addObservation(observation);
+         
+         // Recharger la liste
+         ref.invalidateSelf();
+       } catch (error) {
+         state = AsyncError(error, StackTrace.current);
+       }
+     }
+
+     Future<void> syncObservations() async {
+       final repository = ref.read(observationsRepositoryProvider);
+       await repository.syncWithServer();
+       ref.invalidateSelf();
+     }
+   }
+
+**Provider généré automatiquement :**
+
+.. code-block:: dart
+
+   // Dans observations_viewmodel.g.dart (généré)
+   final observationsViewModelProvider = 
+       AsyncNotifierProvider.autoDispose<ObservationsViewModel, List<Observation>>(
+     ObservationsViewModel.new,
+   );
+
+**Utilisation dans un Widget :**
+
+.. code-block:: dart
+   :linenos:
+   :caption: lib/presentation/view/observations_list_page.dart
+
+   class ObservationsListPage extends ConsumerWidget {
+     @override
+     Widget build(BuildContext context, WidgetRef ref) {
+       final observationsAsync = ref.watch(observationsViewModelProvider);
+       
+       return observationsAsync.when(
+         loading: () => const CircularProgressIndicator(),
+         error: (error, stack) => Text('Erreur: $error'),
+         data: (observations) => ListView.builder(
+           itemCount: observations.length,
+           itemBuilder: (context, index) {
+             final obs = observations[index];
+             return ListTile(
+               title: Text(obs.species ?? 'Espèce inconnue'),
+               subtitle: Text('${obs.date}'),
+               trailing: IconButton(
+                 icon: Icon(Icons.sync),
+                 onPressed: () {
+                   ref.read(observationsViewModelProvider.notifier)
+                       .syncObservations();
+                 },
+               ),
+             );
+           },
+         ),
+       );
+     }
+   }
+
+Pourquoi ces 3 librairies ensemble ?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. admonition:: 🔄 Écosystème cohérent
+   :class: key-point
+   
+   **Freezed + Drift + Riverpod** forment un écosystème parfaitement intégré :
+   
+   1. **Freezed** : Modèles immutables type-safe
+   2. **Drift** : Persistance locale avec type safety
+   3. **Riverpod** : State management réactif et performant
+   
+   **Résultat** : Application robuste, performante et maintenable !
+
+**Flux de données typique :**
+
+.. code-block:: text
+
+   User Action → Riverpod Provider → Repository → Drift DAO → SQLite
+                                          ↓
+   UI Update ← Riverpod State ← Domain Model ← Freezed Model ← Database
+
+**Génération de code nécessaire :**
+
+.. code-block:: bash
+
+   # Cette commande génère TOUT le code nécessaire
+   make generate_code
+   
+   # Équivalent à :
+   flutter packages pub run build_runner build --delete-conflicting-outputs
+
+**Fichiers générés :**
+
+- `*.freezed.dart` - Modèles Freezed
+- `*.g.dart` - JSON serialization + Riverpod providers  
+- `*.drift.dart` - Tables et DAOs Drift
+
+.. raw:: html
+
+   </div>
+
+.. raw:: html
+
+   </div>
 
 Contact
 =======
