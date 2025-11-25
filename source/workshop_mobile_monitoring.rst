@@ -283,57 +283,139 @@ Partie 3 : Visite guidée du code (30 min)
 Architecture Clean Architecture
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: _static/workshop/clean_architecture_overview.png
-   :alt: Vue d'ensemble Clean Architecture
+.. image:: _static/workshop/all_layers.png
+   :alt: Vue d'ensemble de l'architecture Clean Architecture avec les 3 couches
    :align: center
-   :width: 90%
+   :width: 100%
 
-*Diagramme montrant les 3 couches concentriques : Domain (centre), Data (milieu), Presentation (extérieur)*
+*Architecture complète de GN Mobile Monitoring montrant les 3 couches et leurs interactions*
 
-.. container:: architecture-overview
-
-   .. container:: layer-card domain
-   
-      **💼 DOMAIN Layer**
-      
-      *Business Logic*
-      
-      • Modèles métier (Freezed)
-      • Cas d'usage
-      • Interfaces repository
-      • **100% indépendant**
-   
-   .. container:: layer-card data
-   
-      **🔧 DATA Layer**
-      
-      *Technical Implementation*
-      
-      • API REST (Dio)
-      • SQLite (Drift)
-      • Implémentations
-      • Mappers Entity ↔ Model
-   
-   .. container:: layer-card presentation
-   
-      **🎨 PRESENTATION Layer**
-      
-      *User Interface*
-      
-      • Écrans Flutter
-      • State (Riverpod)
-      • Widgets UI
-      • Navigation
 
 .. admonition:: 💡 Principe fondamental
    :class: key-point
    
    Direction des dépendances : **Extérieur → Intérieur**
    
-   Le Domain ne dépend de RIEN !
+   Le Domain ne dépend de RIEN ! C'est le cœur de l'application, complètement indépendant des frameworks et technologies.
 
-.. note::
-   Le Domain ne dépend de RIEN. C'est le cœur de l'application, complètement indépendant des frameworks et technologies.
+
+Pourquoi Clean Architecture ?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Problèmes sans architecture** :
+
+- ❌ Logique métier mélangée avec l'UI
+- ❌ Difficile à tester
+- ❌ Dépendance forte aux frameworks
+- ❌ Difficulté à changer de technologie (DB, API)
+
+**Avantages de Clean Architecture** :
+
+- ✅ **Testabilité** : Logique métier isolée et facilement testable
+- ✅ **Flexibilité** : Changer DB ou API sans toucher au métier
+- ✅ **Maintenabilité** : Responsabilités claires
+- ✅ **Réutilisabilité** : Domain peut être réutilisé dans d'autres apps
+
+Les 3 couches en détail
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+**1. DOMAIN Layer (💼 Business Logic)** :
+
+.. image:: _static/workshop/domain_layer.png
+   :alt: Détail de la couche Domain
+   :align: center
+   :width: 90%
+
+- Contient toute la logique métier
+- Indépendant de toute technologie
+- Modèles avec ``@freezed`` (immutabilité)
+- Repositories = interfaces abstraites
+- Use cases = une action métier = une classe
+
+**2. DATA Layer (🔧 Technical Implementation)** :
+
+.. image:: _static/workshop/data_layer.png
+   :alt: Détail de la couche Data
+   :align: center
+   :width: 90%
+
+- Implémente les détails techniques
+- Data Sources : API REST, SQLite
+- Entities : Représentent les tables DB
+- Mappers : Convertissent Entity ↔ Domain Model
+- Repository Impl : Implémente l'interface du Domain
+
+**3. PRESENTATION Layer (🎨 User Interface)** :
+
+.. image:: _static/workshop/presentation_layer.png
+   :alt: Détail de la couche Presentation
+   :align: center
+   :width: 90%
+
+- Affichage et interactions utilisateur
+- Views : Widgets Flutter (pages, écrans)
+- ViewModels : Gestion d'état avec Riverpod
+- Widgets : Composants UI réutilisables
+- Ne connaît que le **Domain** (pas la Data)
+
+.. container:: example-box
+
+   **Exemple : Synchro dans une vraie app**
+
+   Supposons que tu dois synchroniser des données d'observations depuis le mobile vers le serveur. Voici comment la Clean Architecture rend cela flexible :
+
+   .. list-table::
+      :widths: 30 70
+
+      * - **Présentation**
+        - L'utilisateur tape sur un bouton « Synchroniser ». Le widget appelle un ViewModel, qui lance le use case `SyncObservations`.
+      * - **Domain**
+        - Le use case `SyncObservationsUseCase` décrit « synchroniser les observations », sans savoir comment ni où.
+      * - **Data**
+        - L'implémentation du repository (ex: `ObservationsRepositoryImpl`) effectue la synchro via API REST, ou plus tard vers un serveur local, ou un fichier...
+
+   **Indépendance technologique :**
+   
+   Si demain tu veux :
+   
+   - synchroniser vers un fichier plutôt qu'une API ;
+   - migrer de SQLite à Hive ;
+   - ajouter un mode « envoi Bluetooth » ;
+   
+   il suffit de modifier/ajouter la couche Data, sans toucher à ta logique Domain – ni à tes widgets UI.
+
+   .. code-block:: dart
+
+      // (extrait simplifié)
+      // DOMAIN
+      abstract class ObservationsRepository {
+        Future<void> sync();
+      }
+
+      class SyncObservationsUseCase {
+        final ObservationsRepository repo;
+        SyncObservationsUseCase(this.repo);
+
+        Future<void> call() => repo.sync();
+      }
+
+      // DATA
+      class ObservationsRepositoryImpl implements ObservationsRepository {
+        @override
+        Future<void> sync() async {
+          // Ici, appelle soit une API, soit écrit dans un fichier, etc.
+        }
+      }
+
+      // PRESENTATION
+      // (Vue ou ViewModel)
+      final useCase = SyncObservationsUseCase(ObservationsRepositoryImpl());
+      // Un bouton appelle : await useCase();
+
+   *Ainsi, la logique métier reste isolée, quels que soient les choix techniques du dessous.*
+
+
+
 
 Inversion de Dépendances (DIP)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -809,60 +891,6 @@ State management (Riverpod)
        return Text('Count: $count');
      }
    }
-
-Clean Architecture
-------------------
-
-Pourquoi Clean Architecture ?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**Problèmes sans architecture** :
-
-- ❌ Logique métier mélangée avec l'UI
-- ❌ Difficile à tester
-- ❌ Dépendance forte aux frameworks
-- ❌ Difficulté à changer de technologie (DB, API)
-
-**Avantages de Clean Architecture** :
-
-- ✅ **Testabilité** : Logique métier isolée et facilement testable
-- ✅ **Flexibilité** : Changer DB ou API sans toucher au métier
-- ✅ **Maintenabilité** : Responsabilités claires
-- ✅ **Réutilisabilité** : Domain peut être réutilisé dans d'autres apps
-
-Les 3 couches en détail
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. image:: _static/workshop/architecture_layers_detailed.png
-   :alt: Détail des 3 couches avec arborescence de fichiers
-   :align: center
-   :width: 100%
-
-*Diagramme montrant la structure des dossiers pour chaque couche avec exemples de fichiers*
-
-**1. DOMAIN Layer (💼 Business Logic)** :
-
-- Contient toute la logique métier
-- Indépendant de toute technologie
-- Modèles avec ``@freezed`` (immutabilité)
-- Repositories = interfaces abstraites
-- Use cases = une action métier = une classe
-
-**2. DATA Layer (🔧 Technical Implementation)** :
-
-- Implémente les détails techniques
-- Data Sources : API REST, SQLite
-- Entities : Représentent les tables DB
-- Mappers : Convertissent Entity ↔ Domain Model
-- Repository Impl : Implémente l'interface du Domain
-
-**3. PRESENTATION Layer (🎨 User Interface)** :
-
-- Affichage et interactions utilisateur
-- Views : Widgets Flutter (pages, écrans)
-- ViewModels : Gestion d'état avec Riverpod
-- Widgets : Composants UI réutilisables
-- Ne connaît que le **Domain** (pas la Data)
 
 Logique métier
 --------------
