@@ -21,6 +21,7 @@ Les dates et sujets des ateliers futurs peuvent être retrouvés sur `la page de
    qgis_builder
    gn_monitoring
    workshop_mobile_monitoring
+   workshop_mobile_monitoring_tests
    intelligence-artificielle
    qgis_reseau
    si_rnf

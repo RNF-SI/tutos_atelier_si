@@ -24,7 +24,6 @@ extensions = [
     "sphinx_copybutton",
     "sphinxcontrib.youtube",
     "sphinxcontrib.video",
-    'sphinxcontrib.pdfembed'
     ]
 
 templates_path = ['_templates']
@@ -38,6 +37,10 @@ language = 'fr'
 html_theme = 'sphinx_rtd_theme'
 html_logo = "./_static/Logo_RNF_blanc.png"
 html_static_path = ['_static']
+
+# CSS personnalisé pour le workshop
+def setup(app):
+    app.add_css_file('workshop.css')
 
 html_theme_options = {
     "canonical_url": "",

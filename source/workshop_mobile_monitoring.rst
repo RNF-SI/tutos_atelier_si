@@ -1094,50 +1094,6 @@ Annexes
    <div class="section-separator"></div>
    <div class="annexes">
 
-Checklist préparation
----------------------
-
-Avant le workshop
-~~~~~~~~~~~~~~~~~
-
-.. code-block:: text
-
-   ☐ Documentation relue et corrigée
-   ☐ Serveur GeoNature de test accessible
-   ☐ Modules POPAAMPHIBIEN et POPREPTILE installés
-   ☐ 10 comptes utilisateurs créés
-   ☐ Issues GitHub créées avec labels
-   ☐ Canal Slack/Discord créé
-   ☐ Email pré-workshop envoyé
-   ☐ Tests unitaires passent à 100%
-
-Pendant la réunion
-~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: text
-
-   ☐ Présentation GeoNature + démo
-   ☐ Installation pour tous les participants
-   ☐ Clone + pub get + generate_code OK
-   ☐ Configuration .env.test
-   ☐ Premier lancement validé
-   ☐ Tests unitaires passent
-   ☐ Présentation architecture
-   ☐ Attribution features
-   ☐ Accès documentation
-
-Critères de succès
-------------------
-
-.. code-block:: text
-
-   ☐ Tous les participants ont l'environnement fonctionnel
-   ☐ Au moins 4 features sur 6 complétées (même partiellement)
-   ☐ Pull Requests créées avec code testé
-   ☐ Démos réussies le vendredi
-   ☐ Feedback positif des participants
-   ☐ Au moins 80% des participants se sentent capables de continuer à contribuer
-
 Librairies clés du projet
 --------------------------
 
@@ -1550,13 +1506,7 @@ Pourquoi ces 3 librairies ensemble ?
 Contact
 =======
 
-**Organisateur** : Antoine Schlegel
-
-**Support** : Slack #workshop-mobile
-
-**Email** : antoine.schlegel@example.com
-
-**Repository** : https://github.com/PnX-SI/gn_mobile_monitoring
+**Repository** : https://github.com/RNF-SI/gn_mobile_monitoring
 
 ----
 

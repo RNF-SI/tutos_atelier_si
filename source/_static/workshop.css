@@ -1,0 +1,404 @@
+/* CSS personnalisé pour le workshop mobile monitoring */
+
+/* === Espacement général === */
+.document {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section {
+    margin-bottom: 60px;
+}
+
+h1, h2 {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+h3, h4 {
+    margin-top: 35px;
+    margin-bottom: 20px;
+}
+
+/* === Cartes d'information === */
+.info-box {
+    background: #e3f2fd;
+    border-left: 5px solid #2196F3;
+    padding: 25px;
+    margin: 30px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.prereq-box {
+    background: #f3e5f5;
+    border-left: 5px solid #9c27b0;
+    padding: 25px;
+    margin: 30px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.key-point {
+    background: #fff3cd;
+    border-left: 5px solid #ffc107;
+    padding: 20px;
+    margin: 30px 0;
+    border-radius: 8px;
+}
+
+/* === Grille de fonctionnalités === */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+/* === Grille des options de développement === */
+.dev-options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.option-card {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.option-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.option-card.recommended {
+    border-color: #4caf50;
+    border-width: 3px;
+}
+
+.option-header {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 25px;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+}
+
+.option-card.recommended .option-header {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+}
+
+.option-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.option-header h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 20px;
+}
+
+.badge-recommended {
+    background: #4caf50;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.badge-alternative {
+    background: #2196f3;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.option-content {
+    padding: 25px;
+}
+
+.setup-step {
+    margin-bottom: 25px;
+}
+
+.setup-step:last-child {
+    margin-bottom: 0;
+}
+
+.setup-step h4 {
+    color: #2196f3;
+    font-size: 16px;
+    margin: 0 0 15px 0;
+    font-weight: bold;
+}
+
+.setup-step ol {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.setup-step li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.feature-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+.feature-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.feature-level {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.feature-level.easy { background: #c8e6c9; color: #2e7d32; }
+.feature-level.medium { background: #fff9c4; color: #f57f17; }
+.feature-level.hard { background: #ffcdd2; color: #c62828; }
+
+/* === Architecture cards === */
+.architecture-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
+}
+
+/* Pour les annexes - cartes plus larges */
+.annexes .architecture-overview {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+}
+
+.layer-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.layer-card.domain {
+    border-top: 5px solid #4caf50;
+}
+
+.layer-card.data {
+    border-top: 5px solid #2196f3;
+}
+
+.layer-card.presentation {
+    border-top: 5px solid #ff9800;
+}
+
+/* === Code blocks améliorés === */
+.highlight {
+    margin: 25px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.code-block-caption {
+    background: #f5f5f5;
+    padding: 10px 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* === Sections avec sidebar === */
+@media (min-width: 1200px) {
+    .with-sidebar {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 40px;
+    }
+    
+    .sidebar-content {
+        position: sticky;
+        top: 20px;
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 8px;
+        height: fit-content;
+    }
+}
+
+/* === Timeline === */
+.timeline-container {
+    position: relative;
+    padding: 40px 0;
+}
+
+.timeline-item {
+    display: flex;
+    margin-bottom: 40px;
+    position: relative;
+    padding-left: 50px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: -40px;
+    width: 2px;
+    background: #e0e0e0;
+}
+
+.timeline-item:last-child::before {
+    display: none;
+}
+
+.timeline-date {
+    position: absolute;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background: #2196f3;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+/* === Tables améliorées === */
+table.docutils {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 25px 0;
+}
+
+table.docutils thead {
+    background: #2196f3;
+    color: white;
+}
+
+table.docutils tbody tr:hover {
+    background: #f5f5f5;
+}
+
+/* === Espacement des listes === */
+ul li, ol li {
+    margin-bottom: 10px;
+}
+
+/* === Admonitions personnalisées === */
+.admonition {
+    border-radius: 8px;
+    padding: 20px;
+    margin: 30px 0;
+}
+
+.admonition.tip {
+    background: #e8f5e9;
+    border-left: 5px solid #4caf50;
+}
+
+.admonition.note {
+    background: #e3f2fd;
+    border-left: 5px solid #2196f3;
+}
+
+.admonition.warning {
+    background: #fff3e0;
+    border-left: 5px solid #ff9800;
+}
+
+/* === Séparateurs visuels === */
+.section-separator {
+    height: 2px;
+    background: linear-gradient(to right, transparent, #e0e0e0, transparent);
+    margin: 60px 0;
+}
+
+/* === Exemples === */
+.example-box {
+    background: #f0f4c3;
+    border: 2px dashed #827717;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 40px 0;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.example-box::before {
+    content: "📝 EXEMPLE";
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    background: #f0f4c3;
+    padding: 5px 15px;
+    font-weight: bold;
+    color: #827717;
+    font-size: 14px;
+    border-radius: 20px;
+    border: 2px solid #827717;
+}
+
+.example-box h5 {
+    color: #558b2f;
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.example-box .list-table {
+    margin-top: 20px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.example-box .code-block {
+    background: #263238;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+    .architecture-overview {
+        grid-template-columns: 1fr;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
