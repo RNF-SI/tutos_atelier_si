@@ -733,771 +733,24 @@ Où placer la logique métier ?
      }
    }
 
-Tests unitaires en Flutter
-===========================
+Tests unitaires et d'intégration
+================================
 
-.. raw:: html
-
-   <div class="section-separator"></div>
+Les tests sont un aspect fondamental du développement d'applications robustes. Pour une exploration approfondie des stratégies de test dans le contexte de GN Mobile Monitoring, consultez notre guide dédié.
 
 .. container:: info-box
 
-   **🎯 Pourquoi les tests unitaires ?**
+   **📚 Guide complet des tests**
    
-   Dans Clean Architecture, les tests unitaires sont essentiels pour valider que votre **logique métier** fonctionne correctement, indépendamment de l'interface utilisateur ou des services externes.
-
-Introduction à la pyramide des tests
-------------------------------------
-
-.. image:: _static/workshop/pyramide_test.png
-   :alt: Pyramide des tests
-   :align: center
-   :width: 70%
-
-*Pyramide des tests : Tests unitaires (base large) → Tests d'intégration (milieu) → Tests E2E (sommet)*
-
-.. container:: architecture-overview
-
-   .. container:: layer-card domain
+   Un tutoriel séparé couvre en détail :
    
-      **🧪 Tests unitaires**
-      
-      *70% de vos tests*
-      
-      • Rapides (< 1 seconde)
-      • Isolés (pas de dépendances)
-      • Testent la logique métier
-      • **Domain Layer seulement**
+   • La pyramide des tests et les stratégies de test
+   • Les tests unitaires avec des exemples concrets
+   • Les tests d'intégration et leur configuration
+   • Les bonnes pratiques et patterns réutilisables
+   • L'intégration dans le workflow de développement
    
-   .. container:: layer-card data
-   
-      **🔗 Tests d'intégration**
-      
-      *20% de vos tests*
-      
-      • Plus lents (quelques secondes)
-      • Testent les interactions
-      • API + Database + Cache
-      • **Data Layer principalement**
-   
-   .. container:: layer-card presentation
-   
-      **📱 Tests E2E**
-      
-      *10% de vos tests*
-      
-      • Très lents (minutes)
-      • Interface complète
-      • Parcours utilisateur
-      • **Toute l'application**
-
-Que tester avec les tests unitaires ?
--------------------------------------
-
-Dans le contexte GN Mobile Monitoring
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. admonition:: ✅ À TESTER (Domain Layer)
-   :class: key-point
-   
-   **Use Cases** : La logique métier pure
-   
-   • Validation des observations (dates, coordonnées)
-   • Calculs de distances ou surfaces
-   • Règles de compatibilité entre modules
-   • Transformation et filtrage des données
-   • Validation des protocoles de monitoring
-   • Règles de synchronisation (conflits, merge)
-   • Calculs GPS (surfaces, distances entre sites)
-   • Formatage des nomenclatures
-   • Validation des formulaires dynamiques
-   • Logic de cache offline
-   
-   **Modèles** : Les objets métier
-   
-   • Sérialisation/désérialisation JSON
-   • Méthodes `copyWith()` générées par Freezed
-   • Égalité et hashCode
-   • Getters calculés et validation
-   
-   **Value Objects** : Objets métier immutables
-   
-   • Coordonnées GPS, Email, ID utilisateur
-   • Validation à la création
-   • Comportements métier spécifiques
-
-.. admonition:: ❌ À NE PAS TESTER (en unitaire)
-   :class: warning
-   
-   **Évitez de tester** :
-   
-   • Widgets Flutter (→ Tests de widgets séparés)
-   • Appels API HTTP (→ Tests d'intégration)
-   • Base de données SQLite (→ Tests d'intégration)  
-   • Navigation entre écrans (→ Tests E2E)
-   • Providers Riverpod (→ Tests d'intégration)
-
-Configuration des tests dans le projet
---------------------------------------
-
-Structure des tests
-~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: text
-
-   test/
-   ├── unit/
-   │   ├── domain/
-   │   │   ├── model/
-   │   │   │   └── observation_test.dart
-   │   │   └── usecase/
-   │   │       └── validate_observation_test.dart
-   │   └── data/
-   │       └── mapper/
-   │           └── observation_mapper_test.dart
-   ├── integration/
-   │   └── api/
-   │       └── sites_api_test.dart
-   └── test_helpers/
-       ├── mock_providers.dart
-       └── test_data.dart
-
-Commandes utiles
-~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-   # Lancer tous les tests unitaires
-   make test-unit
-   # ou
-   flutter test test/unit/
-
-   # Lancer un test spécifique
-   flutter test test/unit/domain/usecase/validate_observation_test.dart
-
-   # Tests avec couverture de code
-   flutter test --coverage
-
-   # Tests en mode watch (relance automatique)
-   flutter test --watch
-
-   # Lancer les tests d'intégration (nécessite .env.test)
-   make test-integration
-
-   # Lancer TOUS les tests 
-   make test-all
-
-   # Tests avec couverture
-   flutter test --coverage --exclude-tags=integration
-
-Exemples de tests concrets
---------------------------
-  Exemples de tests spécifiques au monitoring
-  -------------------------------------------
-
-  Test de validation de formulaire dynamique
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  .. code-block:: dart
-     :caption: Issu de form_config_parser_test.dart
-
-     test('should parse conditional fields correctly', () {
-       // Arrange - Configuration JSON du module
-       final configJson = {
-         'fields': [
-           {'name': 'nb_individuals', 'type': 'number', 'required': true},
-           {'name': 'sex', 'type': 'nomenclature', 'hidden': 'nb_individuals == 0'}
-         ]
-       };
-
-       // Act
-       final config = FormConfigParser.parse(configJson);
-
-       // Assert
-       expect(config.shouldShowField('sex', {'nb_individuals': 0}), false);
-       expect(config.shouldShowField('sex', {'nb_individuals': 5}), true);
-     });
-
-  Test de logique de synchronisation
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  .. code-block:: dart
-     :caption: Issu de sync_cache_manager_test.dart
-
-     test('should handle sync conflicts correctly', () async {
-       // Arrange - Données locales vs serveur
-       final localVisit = Visit(id: 1, lastModified: yesterday);
-       final serverVisit = Visit(id: 1, lastModified: today);
-       
-       // Act
-       final conflict = syncManager.detectConflict(localVisit, serverVisit);
-       
-       // Assert
-       expect(conflict.type, ConflictType.dataModified);
-       expect(conflict.requiresUserChoice, true);
-     });
-
-  Test de calculs GPS terrain
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  .. code-block:: dart
-     :caption: Test spécifique aux données de terrain
-
-     test('should calculate site area from GPS points', () {
-       // Arrange - Coordonnées d'un site
-       final gpsPoints = [
-         GPSPoint(lat: 45.123, lng: 5.456),
-         GPSPoint(lat: 45.125, lng: 5.459),
-         GPSPoint(lat: 45.121, lng: 5.461),
-         GPSPoint(lat: 45.123, lng: 5.456), // Fermeture du polygone
-       ];
-       
-       // Act
-       final area = SiteCalculator.calculateArea(gpsPoints);
-       
-       // Assert
-       expect(area, closeTo(0.084, 0.01)); // ~840m² ± 10m²
-     });
-
-Test d'un Use Case avec mocks
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**Objectif** : Tester la logique métier de façon isolée, sans dépendances externes.
-
-.. code-block:: dart
-   :linenos:
-   :emphasize-lines: 14, 22-23
-   :caption: test/unit/domain/usecase/validate_observation_test.dart
-
-   import 'package:flutter_test/flutter_test.dart';
-   import 'package:mockito/mockito.dart';
-
-   void main() {
-     group('ValidateObservationUseCase', () {
-       late ValidateObservationUseCase useCase;
-
-       setUp(() {
-         useCase = ValidateObservationUseCase();
-       });
-
-       test('should reject future date', () async {
-         // Arrange
-         final futureObs = Observation(
-           id: '1',
-           date: DateTime.now().add(Duration(days: 1)), // ← Date future
-           latitude: 45.0,
-           longitude: 5.0,
-         );
-
-         // Act
-         final result = await useCase.call(futureObs);
-
-         // Assert
-         expect(result.isValid, false);
-         expect(result.error, contains('Date future'));
-       });
-
-       test('should reject missing coordinates', () async {
-         // Arrange
-         final invalidObs = Observation(
-           id: '2',
-           date: DateTime.now(),
-           latitude: null, // ← Coordonnées manquantes
-           longitude: null,
-         );
-
-         // Act
-         final result = await useCase.call(invalidObs);
-
-         // Assert
-         expect(result.isValid, false);
-         expect(result.error, contains('Coordonnées'));
-       });
-
-       test('should accept valid observation', () async {
-         // Arrange
-         final validObs = Observation(
-           id: '3',
-           date: DateTime.now(),
-           latitude: 45.0,
-           longitude: 5.0,
-         );
-
-         // Act
-         final result = await useCase.call(validObs);
-
-         // Assert
-         expect(result.isValid, true);
-         expect(result.error, isNull);
-       });
-     });
-   }
-
-Test d'un modèle Freezed
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: dart
-   :linenos:
-   :caption: test/unit/domain/model/observation_test.dart
-
-   import 'dart:convert';
-   import 'package:flutter_test/flutter_test.dart';
-
-   void main() {
-     group('Observation Model', () {
-       const testObservation = Observation(
-         id: '123',
-         date: '2023-12-01T10:30:00Z',
-         species: 'Salamandre tachetée',
-         latitude: 45.123,
-         longitude: 5.456,
-       );
-
-       test('should serialize to JSON correctly', () {
-         // Act
-         final json = testObservation.toJson();
-
-         // Assert
-         expect(json['id'], '123');
-         expect(json['species'], 'Salamandre tachetée');
-         expect(json['latitude'], 45.123);
-       });
-
-       test('should deserialize from JSON correctly', () {
-         // Arrange
-         final jsonString = '''
-         {
-           "id": "456",
-           "date": "2023-12-02T14:15:00Z",
-           "species": "Triton palmé",
-           "latitude": 46.0,
-           "longitude": 6.0
-         }
-         ''';
-
-         // Act
-         final observation = Observation.fromJson(
-           jsonDecode(jsonString)
-         );
-
-         // Assert
-         expect(observation.id, '456');
-         expect(observation.species, 'Triton palmé');
-         expect(observation.latitude, 46.0);
-       });
-
-       test('copyWith should work correctly', () {
-         // Act
-         final modified = testObservation.copyWith(
-           species: 'Triton crêté',
-           latitude: 47.0,
-         );
-
-         // Assert
-         expect(modified.id, '123'); // ← Inchangé
-         expect(modified.species, 'Triton crêté'); // ← Modifié
-         expect(modified.latitude, 47.0); // ← Modifié
-         expect(modified.longitude, 5.456); // ← Inchangé
-       });
-
-       test('equality should work correctly', () {
-         // Arrange
-         const identical = Observation(
-           id: '123',
-           date: '2023-12-01T10:30:00Z',
-           species: 'Salamandre tachetée',
-           latitude: 45.123,
-           longitude: 5.456,
-         );
-
-         const different = Observation(
-           id: '999',
-           date: '2023-12-01T10:30:00Z',
-           species: 'Salamandre tachetée',
-           latitude: 45.123,
-           longitude: 5.456,
-         );
-
-         // Assert
-         expect(testObservation, equals(identical));
-         expect(testObservation, isNot(equals(different)));
-       });
-     });
-   }
-
-Test d'un Repository avec mocks
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: dart
-   :linenos:
-   :emphasize-lines: 8, 18, 27
-   :caption: test/unit/domain/usecase/get_sites_test.dart
-
-   import 'package:flutter_test/flutter_test.dart';
-   import 'package:mockito/mockito.dart';
-   import 'package:mockito/annotations.dart';
-
-   // Génère automatiquement MockSitesRepository
-   @GenerateMocks([SitesRepository])
-   void main() {
-     late MockSitesRepository mockRepository;
-     late GetSitesUseCase useCase;
-
-     setUp(() {
-       mockRepository = MockSitesRepository();
-       useCase = GetSitesUseCase(mockRepository);
-     });
-
-     group('GetSitesUseCase', () {
-       test('should return sites from repository', () async {
-         // Arrange - Mock du comportement
-         final expectedSites = [
-           Site(id: 1, name: 'Site A', coordinates: [45.0, 5.0]),
-           Site(id: 2, name: 'Site B', coordinates: [46.0, 6.0]),
-         ];
-         when(mockRepository.getSites('POPAAMPHIBIEN'))
-             .thenAnswer((_) async => expectedSites);
-
-         // Act
-         final result = await useCase.call('POPAAMPHIBIEN');
-
-         // Assert
-         expect(result, expectedSites);
-         verify(mockRepository.getSites('POPAAMPHIBIEN')).called(1);
-       });
-
-       test('should handle repository error', () async {
-         // Arrange
-         when(mockRepository.getSites(any))
-             .thenThrow(Exception('Network error'));
-
-         // Act & Assert
-         expect(
-           () => useCase.call('POPAAMPHIBIEN'),
-           throwsA(isA<Exception>()),
-         );
-       });
-     });
-   }
-
-Bonnes pratiques pour les tests
--------------------------------
-
-Structure AAA (Arrange-Act-Assert)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. admonition:: 📝 Pattern AAA
-   :class: key-point
-   
-   **Arrange** : Préparer les données et mocks
-   
-   **Act** : Exécuter la fonction à tester
-   
-   **Assert** : Vérifier le résultat attendu
-
-.. code-block:: dart
-
-   test('should calculate distance correctly', () {
-     // Arrange ← 🔧 Préparation
-     final pointA = Coordinate(45.0, 5.0);
-     final pointB = Coordinate(45.1, 5.1);
-     
-     // Act ← ⚡ Exécution
-     final distance = calculateDistance(pointA, pointB);
-     
-     // Assert ← ✅ Vérification
-     expect(distance, closeTo(15.7, 0.1)); // ~15.7km ± 0.1
-   });
-
-Nommage des tests
-~~~~~~~~~~~~~~~~
-
-.. code-block:: dart
-
-   // ✅ BON - Décrit le comportement
-   test('should return empty list when no observations found')
-   test('should throw exception when user is not authenticated')
-   test('should validate email format correctly')
-
-   // ❌ MAUVAIS - Trop vague
-   test('test login')
-   test('check email') 
-   test('repository test')
-
-Gestion des mocks
-~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-   # Générer automatiquement les mocks
-   flutter packages pub run build_runner build
-
-.. code-block:: dart
-
-   // Dans le fichier de test
-   @GenerateMocks([
-     SitesRepository,
-     AuthRepository, 
-     DatabaseProvider,
-   ])
-
-Couverture de code
-~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-   # Générer un rapport de couverture
-   flutter test --coverage
-   
-   # Voir le rapport dans un navigateur
-   genhtml coverage/lcov.info -o coverage/html
-   open coverage/html/index.html
-
-.. tip::
-   🎯 **Objectif couverture** : Visez 80%+ pour le Domain Layer, moins critique pour Presentation/Data.
-
-Debugging des tests
-~~~~~~~~~~~~~~~~~~
-
-.. code-block:: dart
-
-   test('debug example', () async {
-     // Afficher des valeurs pendant le test
-     print('Value: $result');
-     
-     // Débugger avec le debugger
-     debugger(); // Pause ici si lancé avec --enable-vm-service
-     
-     expect(result, isNotNull);
-   });
-
-.. code-block:: bash
-
-   # Lancer les tests avec debug
-   flutter test --enable-vm-service test/unit/specific_test.dart
-
-Intégration dans le workflow de développement
---------------------------------------------
-
-TDD (Test-Driven Development)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. admonition:: 🔄 Cycle TDD
-   :class: key-point
-   
-   1. **🔴 RED** : Écrire un test qui échoue
-   2. **🟢 GREEN** : Écrire le minimum de code pour passer le test  
-   3. **🔵 REFACTOR** : Améliorer le code tout en gardant les tests verts
-
-.. code-block:: dart
-
-   // 1. RED - Test qui échoue
-   test('should calculate tax correctly', () {
-     final calculator = TaxCalculator();
-     expect(calculator.calculate(100), 20.0); // 20% TVA
-   }); // ← Classe TaxCalculator n'existe pas encore
-
-   // 2. GREEN - Code minimal qui marche
-   class TaxCalculator {
-     double calculate(double amount) => amount * 0.2;
-   }
-
-   // 3. REFACTOR - Améliorer sans casser
-   class TaxCalculator {
-     final double _taxRate;
-     TaxCalculator(this._taxRate);
-     
-     double calculate(double amount) {
-       if (amount < 0) throw ArgumentError('Amount cannot be negative');
-       return amount * _taxRate;
-     }
-   }
-
-Hooks Git (pre-commit)
-~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-   # .git/hooks/pre-commit
-   #!/bin/sh
-   echo "Running unit tests..."
-   flutter test test/unit/ || exit 1
-   echo "All tests passed!"
-
-CI/CD Integration
-~~~~~~~~~~~~~~~~
-
-.. code-block:: yaml
-
-   # .github/workflows/test.yml
-   name: Tests
-   on: [push, pull_request]
-   
-   jobs:
-     test:
-       runs-on: ubuntu-latest
-       steps:
-         - uses: actions/checkout@v3
-         - uses: subosito/flutter-action@v2
-         - run: flutter pub get
-         - run: make generate_code
-         - run: flutter test test/unit/
-         - run: flutter test --coverage
-         - uses: codecov/codecov-action@v3
-
-.. code-block:: dart
-
-   void main() {
-     late MockSitesRepository mockRepository;
-     late GetSitesUseCase useCase;
-
-     setUp(() {
-       mockRepository = MockSitesRepository();
-       // Setup avec Riverpod ProviderContainer
-     });
-
-     group('GetSitesUseCase', () {
-       test('should return list of sites', () async {
-         // Arrange
-         final expectedSites = [
-           Site(id: 1, name: 'Site 1', code: 'S1'),
-           Site(id: 2, name: 'Site 2', code: 'S2'),
-         ];
-         when(mockRepository.getSites())
-             .thenAnswer((_) async => expectedSites);
-
-         // Act
-         final result = await useCase.call();
-
-         // Assert
-         expect(result, expectedSites);
-         verify(mockRepository.getSites()).called(1);
-       });
-     });
-   }
-
-Tests d'intégration
-~~~~~~~~~~~~~~~~~~~
-
-**Objectif** : Tester les flux complets avec un serveur réel.
-
-**Exemple** :
-
-.. code-block:: dart
-
-   @Tags(['integration'])
-   void main() {
-     late TestServerConfig config;
-
-     setUpAll(() async {
-       config = await TestEnvironmentSetup.getConfig();
-     });
-
-     test('should login and fetch sites', () async {
-       // Login
-       await AuthHelper.loginWithTestConfig(config);
-
-       // Récupérer sites
-       final sites = await sitesRepository.getSites('POPAAMPHIBIEN');
-
-       // Assert
-       expect(sites, isNotEmpty);
-     });
-   }
-
-Exécution
-~~~~~~~~~
-
-.. code-block:: bash
-
-   # Tests unitaires uniquement
-   flutter test --exclude-tags=integration
-
-   # Tests d'intégration uniquement
-   flutter test test/integration/ --tags=integration
-
-   # Tous les tests
-   flutter test
-
-Configuration des tests d'intégration
--------------------------------------
-
-Variables d'environnement requises
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-   :caption: .env.test (copier depuis .env.test.example)
-
-   # Serveur GeoNature de test
-   GEONATURE_API_URL=https://demo.geonature.fr
-   TEST_USERNAME=test@geonature.fr
-   TEST_PASSWORD=password
-
-   # Module de test
-   TEST_MODULE_CODE=POPAAMPHIBIEN
-   TEST_SITE_GROUP_ID=1
-
-Tags de tests
-~~~~~~~~~~~~~
-
-.. code-block:: dart
-
-   @Tags(['integration'])
-   void main() {
-      group('Sites API Integration', () {
-      // Tests nécessitant un serveur réel
-      });
-   }
-
-
-Tests d'intégration spécifiques
--------------------------------
-
-Configuration du serveur de test
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. admonition:: 🔧 Setup intégration
-   :class: key-point
-
-   Avant de lancer les tests d'intégration :
-
-   1. Copiez ``.env.test.example`` vers ``.env.test``
-   2. Configurez les credentials du serveur de test
-   3. Assurez-vous que le serveur GeoNature est accessible
-   4. Lancez : ``make test-integration``
-
-.. code-block:: dart
-   :caption: test/integration/auth_integration_test.dart
-
-   @Tags(['integration'])
-   group('Authentication Integration', () {
-      test('should authenticate against real server', () async {
-      // Utilise les vraies API GeoNature
-      final authRepo = AuthenticationRepositoryImpl();
-      final result = await authRepo.login(
-         email: testConfig.username,
-         password: testConfig.password,
-      );
-
-      expect(result.isSuccess, true);
-      expect(result.token, isNotEmpty);
-      });
-   });
-
-
-  Métriques du projet GN Mobile
-  -----------------------------
-
-  .. container:: metrics-grid
-
-     **📊 Tests actuels** (au 26/11/2024)
-
-     • **Tests unitaires** : ~80 fichiers de test
-     • **Tests d'intégration** : en cours de développement
-     • **Coverage Domain** : ~85% (use cases bien testés)
-     • **Coverage Data** : ~70% (repositories et mappers)
-     • **Coverage Presentation** : ~60% (widgets et viewmodels)
-
+   👉 **Consulter le** :doc:`Guide des tests Flutter <workshop_mobile_monitoring_tests>`
 
 Ressources techniques
 =====================
@@ -1606,24 +859,113 @@ Make (shortcuts du projet)
 ADB (Android Debug Bridge)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Commandes de base
+^^^^^^^^^^^^^^^^^
+
 .. code-block:: bash
 
-   # Devices
+   # Lister les appareils connectés
    adb devices
+   
+   # Installer/désinstaller l'app
+   adb install app-debug.apk
+   adb uninstall com.example.gn_mobile_monitoring
 
-   # Logs
+Debugging et logs
+^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+   # Logs en temps réel (toutes les apps)
    adb logcat
+   
+   # Logs filtrés Flutter uniquement
    adb logcat | grep flutter
+   
+   # Logs avec filtres par tag
+   adb logcat -s "flutter,GeoNature,Database"
+   
+   # Effacer les logs puis afficher les nouveaux
+   adb logcat -c && adb logcat | grep flutter
 
-   # Screenshots
+Captures et métriques
+^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+   # Screenshot de l'écran
    adb exec-out screencap -p > screenshot.png
+   
+   # Enregistrement vidéo (max 3 minutes)
+   adb shell screenrecord /sdcard/demo.mp4
+   adb pull /sdcard/demo.mp4
+   
+   # Monitoring mémoire/CPU en temps réel
+   adb shell top | grep com.example.gn_mobile_monitoring
+   
+   # Informations système device
+   adb shell getprop ro.build.version.release  # Version Android
+   adb shell getprop ro.product.model          # Modèle device
 
-   # Base de données
+Base de données et fichiers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+   # Accéder au conteneur app (nécessite app debuggable)
    adb shell run-as com.example.gn_mobile_monitoring
-   cd databases
-   ls
-   # Copier en local
+   
+   # Naviguer dans les données app
+   cd /data/data/com.example.gn_mobile_monitoring
+   ls -la
+   cd app_flutter  # Répertoire Flutter
+   cd databases    # Bases de données Drift
+   
+   # Copier la base SQLite vers votre machine locale
+   # Méthode 1: Via adb pull (si accessible)
    adb pull /data/data/com.example.gn_mobile_monitoring/databases/app.db
+   
+   # Méthode 2: Copie directe via run-as (plus fiable sur device réel)
+   adb exec-out run-as com.example.gn_mobile_monitoring cat /data/data/com.example.gn_mobile_monitoring/app_flutter/app.sqlite > ~/gn_mobile_monitoring/sqlite-db-copy/gn_mobile_monitoring_real_device.db
+
+**Pourquoi cette commande est utile :**
+
+- **📱 Device réel** : Contrairement à l'émulateur, un device physique a des restrictions de sécurité plus strictes
+- **🔒 Sandbox Android** : Les données d'app sont isolées dans `/data/data/[package]/`
+- **💾 Base SQLite** : Contient toutes les données offline (observations, sites, modules) 
+- **🔍 Debug production** : Analyser les données réelles saisies par les utilisateurs terrain
+- **📊 Analyse SQL** : Ouvrir avec DB Browser for SQLite pour requêtes complexes
+- **🐛 Troubleshooting** : Vérifier l'état des données lors de bugs de synchronisation
+
+Analyse avancée de l'app
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+   # Forcer l'arrêt de l'application
+   adb shell am force-stop com.example.gn_mobile_monitoring
+   
+   # Redémarrer l'app
+   adb shell am start -n com.example.gn_mobile_monitoring/.MainActivity
+   
+   # Vider le cache app (équivalent "Clear Data")
+   adb shell pm clear com.example.gn_mobile_monitoring
+
+
+Réseau et connectivité
+^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+   # Simuler perte de réseau (activer mode avion)
+   adb shell cmd connectivity airplane-mode enable
+   adb shell cmd connectivity airplane-mode disable
+   
+   # Rediriger port pour serveur local (développement)
+   adb reverse tcp:8000 tcp:8000  # Device:8000 → PC:8000
+   
+   # Tester connectivité depuis device
+   adb shell ping 8.8.8.8
 
 Git
 ~~~
