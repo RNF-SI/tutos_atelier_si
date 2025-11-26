@@ -81,7 +81,7 @@ Mais attention, il faut un csv annoté, un csv classique ne fonctionnera pas. Pa
 
 Voici un exemple de structure fourni dans la doc de influxdata :
 
-.. code-block:: csv
+.. code-block:: text
 
     #group,false,false,true,true,false,false,true,true,true,true
     #datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,double,string,string,string,string

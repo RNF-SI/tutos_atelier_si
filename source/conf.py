@@ -24,6 +24,7 @@ extensions = [
     "sphinx_copybutton",
     "sphinxcontrib.youtube",
     "sphinxcontrib.video",
+    "sphinxcontrib.pdfembed"
     ]
 
 templates_path = ['_templates']
