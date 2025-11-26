@@ -277,8 +277,8 @@ La plupart des tests doivent être verts. Si beaucoup échouent, demandez de l'a
    
    **Pour en savoir plus** : Voir `Librairies clés du projet`_ en annexe.
 
-Partie 3 : Visite guidée du code (30 min)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Partie 3 : Visite guidée du code
+==========================================
 
 Architecture Clean Architecture
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -488,215 +488,19 @@ Inversion de Dépendances (DIP)
           return ref.read(sitesRepositoryProvider).getSites();
         }
       }
-   
-Partie 4 : Fonctionnalités à développer (20 min)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. raw:: html
+Vue d'ensemble : Flux de données et implémentation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-   <div class="section-separator"></div>
+Ce schéma est une représentation complémentaire qui exprime le flux de données et l'implémentation concrète.
 
-6 fonctionnalités proposées
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. image:: _static/workshop/features_mockups.png
-   :alt: Mockups des 6 fonctionnalités
+.. image:: _static/workshop/architecture_diagram_monitoring.png
+   :alt: Architecture Clean avec flux de données et implémentation concrète
    :align: center
-   :width: 100%
+   :width: 80%
 
-.. raw:: html
+*Le Domain reste indépendant tandis que Data et Presentation implémentent les détails techniques*
 
-   <div class="features-grid">
-      <div class="feature-card">
-         <div class="feature-icon">🗺️</div>
-         <h3>Carte interactive</h3>
-         <div class="feature-level medium">🟡 Moyen</div>
-         <p><strong>Équipe :</strong> 2-3 personnes</p>
-         <ul>
-            <li>Carte OpenStreetMap</li>
-            <li>Marqueurs cliquables</li>
-            <li>Support offline</li>
-            <li>Package : <code>flutter_map</code></li>
-         </ul>
-      </div>
-      
-      <div class="feature-card">
-         <div class="feature-icon">📊</div>
-         <h3>Export CSV</h3>
-         <div class="feature-level easy">🟢 Facile</div>
-         <p><strong>Équipe :</strong> 1-2 personnes</p>
-         <ul>
-            <li>Export observations</li>
-            <li>Partage de fichier</li>
-            <li>Format CSV standard</li>
-            <li>Package : <code>csv</code></li>
-         </ul>
-      </div>
-      
-      <div class="feature-card">
-         <div class="feature-icon">🔍</div>
-         <h3>Filtres avancés</h3>
-         <div class="feature-level medium">🟡 Moyen</div>
-         <p><strong>Équipe :</strong> 2-3 personnes</p>
-         <ul>
-            <li>Filtres par date/module</li>
-            <li>Statut synchronisation</li>
-            <li>Filtres combinables</li>
-            <li>Persistance locale</li>
-         </ul>
-      </div>
-      
-      <div class="feature-card">
-         <div class="feature-icon">📈</div>
-         <h3>Graphiques stats</h3>
-         <div class="feature-level medium">🟡 Moyen</div>
-         <p><strong>Équipe :</strong> 2-3 personnes</p>
-         <ul>
-            <li>Charts interactifs</li>
-            <li>Évolution temporelle</li>
-            <li>Top espèces</li>
-            <li>Package : <code>fl_chart</code></li>
-         </ul>
-      </div>
-      
-      <div class="feature-card">
-         <div class="feature-icon">🎨</div>
-         <h3>Dark Mode</h3>
-         <div class="feature-level easy">🟢 Facile</div>
-         <p><strong>Équipe :</strong> 1-2 personnes</p>
-         <ul>
-            <li>Thème sombre</li>
-            <li>Switch light/dark/auto</li>
-            <li>Persistance du choix</li>
-            <li>Variables de thème</li>
-         </ul>
-      </div>
-      
-      <div class="feature-card">
-         <div class="feature-icon">🔧</div>
-         <h3>Mode offline++</h3>
-         <div class="feature-level hard">🔴 Complexe</div>
-         <p><strong>Équipe :</strong> 2-3 personnes</p>
-         <ul>
-            <li>Indicateur réseau</li>
-            <li>Queue de sync</li>
-            <li>Gestion conflits</li>
-            <li>Sync arrière-plan</li>
-         </ul>
-      </div>
-   </div>
-
-Partie 5 : Ressources et support (10 min)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**Documentation disponible** :
-
-- ``README.md`` : Vue d'ensemble
-- ``CLAUDE.md`` : Instructions développement
-- ``docs/ARCHITECTURE_VISUELLE.md`` : Diagrammes architecture
-- ``docs/CODE_EXAMPLES.md`` : Patterns de code
-- ``docs/FEATURES_OVERVIEW.md`` : Fonctionnalités supportées
-
-**Workflow Git** :
-
-.. code-block:: bash
-
-   # Créer une branche
-   git checkout -b feature/nom-feature
-
-   # Commits réguliers
-   git add .
-   git commit -m "feat: description"
-
-   # Push
-   git push origin feature/nom-feature
-
-   # Créer Pull Request sur GitHub
-
-**Commandes essentielles** :
-
-.. code-block:: bash
-
-   make run              # Lancer l'app
-   make test-unit        # Tests unitaires
-   make test-integration # Tests d'intégration
-   make format           # Formater le code
-   make analyze          # Analyser le code
-   make generate_code    # Générer le code (Freezed, Drift)
-
-Semaine de développement (5 jours)
------------------------------------
-
-.. image:: _static/workshop/workshop_timeline.png
-   :alt: Timeline du workshop sur 5 jours
-   :align: center
-   :width: 100%
-
-*Timeline visuelle : Lundi (setup) → Mardi-Jeudi (développement) → Vendredi (démos)*
-
-Points quotidiens
-~~~~~~~~~~~~~~~~~
-
-**Matin (9h - 15 min)** :
-
-- Tour de table : objectifs de la journée
-- Blocages éventuels
-- Support technique
-
-**Soir (17h - 15 min)** :
-
-- Tour de table : avancement
-- Démos rapides (optionnel)
-- Préparation du lendemain
-
-Workflow de développement
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. image:: _static/workshop/dev_workflow.png
-   :alt: Workflow de développement
-   :align: center
-   :width: 100%
-
-*Diagramme du workflow : Issue → Branch → Dev → Test → PR → Review → Merge*
-
-1. **Choisir une issue** sur GitHub (labels 🟢 🟡 🔴)
-2. **Créer une branche** ``feature/nom-feature``
-3. **Développer** en suivant Clean Architecture
-4. **Tester** : ``make test-unit``
-5. **Formater** : ``make format``
-6. **Analyser** : ``make analyze``
-7. **Commit** : messages clairs (feat, fix, refactor, test, docs)
-8. **Push** et créer une Pull Request
-9. **Revue de code** par l'organisateur
-10. **Merge** si validé
-
-Support asynchrone
-~~~~~~~~~~~~~~~~~~
-
-- Canal Slack #workshop-mobile
-- Réponses aux questions techniques
-- Revue de code intermédiaire si demandé
-
-Démos et clôture (Vendredi)
-----------------------------
-
-Démos (15h-17h)
-~~~~~~~~~~~~~~~
-
-Chaque groupe présente sa fonctionnalité (10-15 min) :
-
-- Démonstration live
-- Retour sur les difficultés
-- Apprentissages clés
-- Code notable (patterns intéressants)
-
-Rétrospective
-~~~~~~~~~~~~~
-
-- Ce qui a bien fonctionné
-- Ce qui peut être amélioré
-- Feedback sur la formation
-- Questionnaire de satisfaction
 
 Concepts clés
 =============
@@ -707,12 +511,6 @@ Développement mobile
 Spécificités du mobile
 ~~~~~~~~~~~~~~~~~~~~~~
 
-.. image:: _static/workshop/offline_first_diagram.png
-   :alt: Stratégie offline-first
-   :align: center
-   :width: 80%
-
-*Diagramme montrant le flux : DB locale (cache) ↔ API (quand en ligne) avec queue de synchronisation*
 
 - **Offline-first** : L'app doit fonctionner sans connexion
 - **Performances** : Device moins puissant qu'un PC
@@ -720,10 +518,8 @@ Spécificités du mobile
 - **Batterie** : Optimiser les opérations réseau et CPU
 - **Stockage** : Limité, attention à la taille de la DB
 
-Flutter vs natif vs React Native
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**Flutter** :
+Flutter
+~~~~~~~
 
 - ✅ Performances quasi-natives (compilé en code machine)
 - ✅ Un seul codebase pour Android + iOS
@@ -837,12 +633,6 @@ Widgets de base
 State management (Riverpod)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. image:: _static/workshop/riverpod_provider_types.png
-   :alt: Types de providers Riverpod
-   :align: center
-   :width: 90%
-
-*Diagramme comparatif des types de providers : Provider (sync), FutureProvider (async), StateNotifier (mutable state)*
 
 .. code-block:: dart
 
@@ -879,15 +669,12 @@ State management (Riverpod)
      }
    }
 
-Logique métier
---------------
+.. raw:: html
 
-.. image:: _static/workshop/business_logic_flow.png
-   :alt: Flux de la logique métier
-   :align: center
-   :width: 90%
+   <a href="https://riverpod.dev/" target="_blank">Documentation officielle de Riverpod</a>
 
-*Diagramme montrant le cheminement d'une requête à travers les couches*
+
+
 
 Qu'est-ce qu'une logique métier ?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -912,12 +699,6 @@ Qu'est-ce qu'une logique métier ?
 Où placer la logique métier ?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. image:: _static/workshop/architecture_dependencies_graph.png
-   :alt: Graphe de dépendances entre composants
-   :align: center
-   :width: 100%
-
-*Graphe montrant toutes les dépendances : Widget → ViewModel → UseCase → Repository → DataSource (API/Database)*
 
 **Use Cases (Domain)** : La logique métier doit être dans les Use Cases
 
@@ -968,7 +749,7 @@ Tests unitaires en Flutter
 Introduction à la pyramide des tests
 ------------------------------------
 
-.. image:: _static/workshop/testing_pyramid.png
+.. image:: _static/workshop/pyramide_test.png
    :alt: Pyramide des tests
    :align: center
    :width: 70%
@@ -1025,6 +806,12 @@ Dans le contexte GN Mobile Monitoring
    • Calculs de distances ou surfaces
    • Règles de compatibilité entre modules
    • Transformation et filtrage des données
+   • Validation des protocoles de monitoring
+   • Règles de synchronisation (conflits, merge)
+   • Calculs GPS (surfaces, distances entre sites)
+   • Formatage des nomenclatures
+   • Validation des formulaires dynamiques
+   • Logic de cache offline
    
    **Modèles** : Les objets métier
    
@@ -1094,8 +881,83 @@ Commandes utiles
    # Tests en mode watch (relance automatique)
    flutter test --watch
 
+   # Lancer les tests d'intégration (nécessite .env.test)
+   make test-integration
+
+   # Lancer TOUS les tests 
+   make test-all
+
+   # Tests avec couverture
+   flutter test --coverage --exclude-tags=integration
+
 Exemples de tests concrets
 --------------------------
+  Exemples de tests spécifiques au monitoring
+  -------------------------------------------
+
+  Test de validation de formulaire dynamique
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  .. code-block:: dart
+     :caption: Issu de form_config_parser_test.dart
+
+     test('should parse conditional fields correctly', () {
+       // Arrange - Configuration JSON du module
+       final configJson = {
+         'fields': [
+           {'name': 'nb_individuals', 'type': 'number', 'required': true},
+           {'name': 'sex', 'type': 'nomenclature', 'hidden': 'nb_individuals == 0'}
+         ]
+       };
+
+       // Act
+       final config = FormConfigParser.parse(configJson);
+
+       // Assert
+       expect(config.shouldShowField('sex', {'nb_individuals': 0}), false);
+       expect(config.shouldShowField('sex', {'nb_individuals': 5}), true);
+     });
+
+  Test de logique de synchronisation
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  .. code-block:: dart
+     :caption: Issu de sync_cache_manager_test.dart
+
+     test('should handle sync conflicts correctly', () async {
+       // Arrange - Données locales vs serveur
+       final localVisit = Visit(id: 1, lastModified: yesterday);
+       final serverVisit = Visit(id: 1, lastModified: today);
+       
+       // Act
+       final conflict = syncManager.detectConflict(localVisit, serverVisit);
+       
+       // Assert
+       expect(conflict.type, ConflictType.dataModified);
+       expect(conflict.requiresUserChoice, true);
+     });
+
+  Test de calculs GPS terrain
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  .. code-block:: dart
+     :caption: Test spécifique aux données de terrain
+
+     test('should calculate site area from GPS points', () {
+       // Arrange - Coordonnées d'un site
+       final gpsPoints = [
+         GPSPoint(lat: 45.123, lng: 5.456),
+         GPSPoint(lat: 45.125, lng: 5.459),
+         GPSPoint(lat: 45.121, lng: 5.461),
+         GPSPoint(lat: 45.123, lng: 5.456), // Fermeture du polygone
+       ];
+       
+       // Act
+       final area = SiteCalculator.calculateArea(gpsPoints);
+       
+       // Assert
+       expect(area, closeTo(0.084, 0.01)); // ~840m² ± 10m²
+     });
 
 Test d'un Use Case avec mocks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1556,6 +1418,86 @@ Exécution
 
    # Tous les tests
    flutter test
+
+Configuration des tests d'intégration
+-------------------------------------
+
+Variables d'environnement requises
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+   :caption: .env.test (copier depuis .env.test.example)
+
+   # Serveur GeoNature de test
+   GEONATURE_API_URL=https://demo.geonature.fr
+   TEST_USERNAME=test@geonature.fr
+   TEST_PASSWORD=password
+
+   # Module de test
+   TEST_MODULE_CODE=POPAAMPHIBIEN
+   TEST_SITE_GROUP_ID=1
+
+Tags de tests
+~~~~~~~~~~~~~
+
+.. code-block:: dart
+
+   @Tags(['integration'])
+   void main() {
+      group('Sites API Integration', () {
+      // Tests nécessitant un serveur réel
+      });
+   }
+
+
+Tests d'intégration spécifiques
+-------------------------------
+
+Configuration du serveur de test
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. admonition:: 🔧 Setup intégration
+   :class: key-point
+
+   Avant de lancer les tests d'intégration :
+
+   1. Copiez ``.env.test.example`` vers ``.env.test``
+   2. Configurez les credentials du serveur de test
+   3. Assurez-vous que le serveur GeoNature est accessible
+   4. Lancez : ``make test-integration``
+
+.. code-block:: dart
+   :caption: test/integration/auth_integration_test.dart
+
+   @Tags(['integration'])
+   group('Authentication Integration', () {
+      test('should authenticate against real server', () async {
+      // Utilise les vraies API GeoNature
+      final authRepo = AuthenticationRepositoryImpl();
+      final result = await authRepo.login(
+         email: testConfig.username,
+         password: testConfig.password,
+      );
+
+      expect(result.isSuccess, true);
+      expect(result.token, isNotEmpty);
+      });
+   });
+
+
+  Métriques du projet GN Mobile
+  -----------------------------
+
+  .. container:: metrics-grid
+
+     **📊 Tests actuels** (au 26/11/2024)
+
+     • **Tests unitaires** : ~80 fichiers de test
+     • **Tests d'intégration** : en cours de développement
+     • **Coverage Domain** : ~85% (use cases bien testés)
+     • **Coverage Data** : ~70% (repositories et mappers)
+     • **Coverage Presentation** : ~60% (widgets et viewmodels)
+
 
 Ressources techniques
 =====================
