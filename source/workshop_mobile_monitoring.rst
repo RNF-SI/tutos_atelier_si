@@ -115,6 +115,38 @@ Installation de Flutter
 Installation d'Android Studio
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. warning::
+   **⚠️ Versions Java et Gradle requises**
+   
+   **Configuration requise :**
+   
+   • **Gradle** : Version 8.7
+   • **Java** : Version 17 minimum, 21 recommandée (Java 25+ ne fonctionne pas)
+   
+   Des erreurs de compilation Gradle peuvent survenir avec des versions incompatibles.
+   
+   **Vérifier vos versions :**
+   
+   .. code-block:: bash
+   
+      java --version
+      gradle --version
+   
+   **Installer Java 21 (recommandé) :**
+   
+   .. code-block:: bash
+   
+      # Ubuntu/Debian
+      sudo apt update
+      sudo apt install openjdk-21-jdk
+      
+      # Définir Java 21 par défaut
+      sudo update-alternatives --config java
+   
+   **Si vous avez Java 25+ installé :**
+   
+   Vous devez basculer vers une version compatible (17-21) pour éviter les erreurs de build.
+
 **Sur Ubuntu** :
 
 .. code-block:: bash
@@ -147,6 +179,39 @@ Installation d'Android Studio
 
    # Vérifier que tout est OK
    flutter doctor -v
+
+Problèmes spécifiques WSL2
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Problème 1 : sdkmanager non trouvé**
+
+Si vous obtenez l'erreur ``sdkmanager not found`` ou ``path/to/sdkmanager --install "cmdline-tools;latest"``:
+
+1. Ouvrir Android Studio depuis WSL2 :
+
+.. code-block:: bash
+
+   cd
+   android-studio
+
+2. Dans Android Studio → **More actions** → **SDK Manager** → **SDK Tools**
+3. Cocher **Android SDK Command-line Tools (latest)**
+4. Cliquer sur **Apply**
+
+**Problème 2 : Erreur Chromium (tests d'intégration)**
+
+Pour les tests d'intégration nécessitant Chromium :
+
+.. code-block:: bash
+
+   cd
+   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+   sudo apt install ./google-chrome-stable_current_amd64.deb
+
+.. note::
+   **💡 Options d'installation :**
+   
+   Certains développeurs préfèrent installer **Android Studio sur Windows** et le reste (Flutter, Git, etc.) sur **WSL2**. Les deux approches fonctionnent bien !
 
 Options de développement
 ------------------------
