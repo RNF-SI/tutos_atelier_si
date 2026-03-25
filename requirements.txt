@@ -36,3 +36,4 @@ sphinxcontrib-youtube
 sphinxcontrib-video
 sphinx-rtd-theme
 git+https://github.com/SuperKogito/sphinxcontrib-pdfembed.git
+standard-imghdr

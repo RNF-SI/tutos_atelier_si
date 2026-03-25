@@ -1,5 +1,5 @@
 ====================================================
-Workshop GN Mobile Monitoring - Développement Mobile
+Workshop GN Mobile Monitoring - Développement Mobile (Atelier du 26 Novembre 2025)
 ====================================================
 
 Formation développement mobile Flutter pour GeoNature
@@ -8,6 +8,8 @@ Formation développement mobile Flutter pour GeoNature
 .. contents:: Table des matières
    :local:
    :depth: 2
+
+.. youtube:: j1yn_Xz1QFo
 
 Introduction
 ============
