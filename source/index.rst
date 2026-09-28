@@ -36,6 +36,7 @@ Les dates et sujets des ateliers futurs peuvent être retrouvés sur `la page de
    gn_integration_bdd
    outil_de_suivi_des_infractions_inter_reserves
    tuto_securiser_serveur
+   keycloak
 
 Contributeurs :
 ---------------
