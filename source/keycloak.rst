@@ -28,6 +28,11 @@ groupes, le contrôle d'accès applicatif, puis la configuration de GeoNature av
    adapter à la politique d'infrastructure de votre établissement.
 
 
+Support de présentation
+=======================
+
+:pdfembed:`src:_static/keycloak/support_keycloak.pdf, height:420, width:100%, align:middle`
+
 Pourquoi Keycloak
 =================
 
@@ -1983,8 +1988,3 @@ Pour aller plus loin
 * Documentation du dépôt GeoNature : ``docs/KEYCLOAK_GEONATURE.md`` (guide exhaustif),
   ``DEPLOYMENT_KEYCLOAK.md`` (note de déploiement),
   ``backend/geonature/keycloak_provider.py`` (code du provider).
-
-Support de présentation
-=======================
-
-:pdfembed:`src:_static/keycloak/support_keycloak.pdf, height:420, width:100%, align:middle`
