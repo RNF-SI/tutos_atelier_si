@@ -27,7 +27,8 @@ Il n'y a pas de CI : le seul contrôle qualité est la sortie de `sphinx-build` 
 - `source/index.rst` — le `toctree` est la table des matières du site **et la liste des contributeurs**. Un nouveau `.rst` n'apparaît que s'il y est ajouté ; l'ordre du toctree est chronologique par atelier, donc les nouveaux tutos vont en fin de liste.
 - `source/<sujet>.rst` — un fichier par atelier, à plat (pas de sous-dossiers).
 - `source/_static/<sujet>/` — un sous-dossier d'assets par tuto (images, `.pdf`, `.webm`, `.mp4`). Respecter ce nommage pour tout nouvel asset.
-- `source/_templates/` n'existe pas encore, bien que déclaré dans `templates_path`.
+- `source/_templates/footer.html` surcharge le pied de page du thème (bloc `extrafooter`) pour ajouter le lien discret vers `vie_privee.rst`, page `:orphan:` volontairement hors du toctree.
+- Sphinx **ne recopie pas** `_static/` si aucun `.rst` n'a changé : après une modif de `workshop.css` ou `matomo.js` seule, faire `rm -rf build` avant `make html` (`make livehtml` n'est pas concerné).
 
 ### Titre de page
 
@@ -56,6 +57,10 @@ Ces extensions sont activées dans `conf.py` et déjà utilisées :
 ### Mise en page riche (tutos workshop)
 
 `workshop.css` définit des classes réutilisables, invoquées via `.. container:: <classe>` (préféré) ou `.. raw:: html` pour les mises en page complexes : `info-box`, `prereq-box`, `setup-step`, `option-card` / `dev-options-grid` / `option-header` / `option-content` / `option-icon`, `badge-recommended` / `badge-alternative`, `section-separator`, `annexes`. Voir `workshop_mobile_monitoring.rst` et `gn_monitoring.rst` comme références. Éviter d'introduire de nouvelles classes CSS sans les ajouter à `workshop.css`, qui est chargé globalement.
+
+## Déploiement et mesure d'audience
+
+Le site est publié sur https://si-en-reseau.reserves-naturelles.org (Apache, pas GitHub Pages malgré `sphinx.ext.githubpages`). La fréquentation est suivie par l'instance Matomo de RNF (`_static/matomo.js`, injecté par `setup(app)`) : suivi sans cookies, respect du Do Not Track, et rien n'est envoyé depuis un build local. La page `vie_privee.rst` décrit cette configuration — la tenir à jour si les réglages Matomo changent.
 
 ## Contribution
 
