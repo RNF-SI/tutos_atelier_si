@@ -131,3 +131,6 @@ dmypy.json
 # add settings file
 source/.vscode/settings.json
 .vscode/
+
+# fichier de lancement du serveur de previsualisation (Claude Code)
+.claude/launch.json
