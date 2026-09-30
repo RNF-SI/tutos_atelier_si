@@ -457,7 +457,7 @@ C'est le paramétrage le plus important de toute la chaîne.
 
 .. IMPORTANT::
 
-   **GeoNature lit les groupes dans ``userinfo``, pas dans le JWT.** L'access token et l'ID
+   **GeoNature lit les groupes dans userinfo, pas dans le JWT.** L'access token et l'ID
    token sont utiles au débogage mais ignorés par le code, tout comme ``realm_access.roles`` et
    ``resource_access``. Si *Add to userinfo* est désactivé, le token contient bien les groupes,
    l'organisme n'est jamais résolu, et seul un warning apparaît dans les logs du backend.
@@ -623,7 +623,7 @@ Le client service ``geonature-sync``
    * - Valid redirect URIs / Web origins
      - vides
 
-*Service account roles* → filtrer sur ``realm-management`` → assigner **``query-groups``**.
+*Service account roles* → filtrer sur ``realm-management`` → assigner le rôle **query-groups**.
 C'est le droit minimum, et il suffit (``view-users`` peut être ajouté pour du débogage).
 
 Ce que GeoNature appelle avec ce client :
