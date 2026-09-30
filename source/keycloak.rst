@@ -1,6 +1,6 @@
-============================================================
-Keycloak × GeoNature : mettre en place un SSO OpenID Connect
-============================================================
+========================================================================
+Keycloak × GeoNature : SSO OpenID Connect (Atelier du 30 septembre 2026)
+========================================================================
 
 .. contents:: Table des matières
    :local:
@@ -9,6 +9,11 @@ Keycloak × GeoNature : mettre en place un SSO OpenID Connect
 Mettre en place un serveur d'identités Keycloak et y brancher GeoNature via un provider
 d'authentification personnalisé, ``KeycloakOrganismProvider``, qui résout l'organisme de
 l'utilisateur et alimente le schéma ``utilisateurs`` de la base.
+
+.. NOTE::
+
+   Cette page est la synthèse présentée en séance. Pour la procédure complète, de l'installation
+   du serveur Keycloak jusqu'au paramétrage de GeoNature, voir :doc:`tuto_keycloak_geonature`.
 
 .. container:: info-box
 
