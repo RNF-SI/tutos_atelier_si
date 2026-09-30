@@ -39,9 +39,10 @@ html_theme = 'sphinx_rtd_theme'
 html_logo = "./_static/Logo_RNF_blanc.png"
 html_static_path = ['_static']
 
-# CSS personnalisé pour le workshop
+# CSS personnalisé pour le workshop et tracking Matomo, sur toutes les pages
 def setup(app):
     app.add_css_file('workshop.css')
+    app.add_js_file('matomo.js')
 
 html_theme_options = {
     "canonical_url": "",

@@ -402,3 +402,10 @@ ul li, ol li {
         grid-template-columns: 1fr;
     }
 }
+
+/* Lien vie privée en pied de page (source/_templates/footer.html) */
+.footer-privacy {
+  margin-top: 0.6em;
+  font-size: 0.85em;
+  opacity: 0.75;
+}

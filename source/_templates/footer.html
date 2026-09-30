@@ -1,0 +1,8 @@
+{% extends "!footer.html" %}
+
+{# Lien discret vers la page vie privée, ajouté en bas de toutes les pages. #}
+{% block extrafooter %}
+  <p class="footer-privacy">
+    <a href="{{ pathto('vie_privee') }}">Vie privée et mesure d'audience</a>
+  </p>
+{% endblock %}
