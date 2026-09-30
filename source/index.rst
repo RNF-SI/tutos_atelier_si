@@ -37,7 +37,6 @@ Les dates et sujets des ateliers futurs peuvent être retrouvés sur `la page de
    outil_de_suivi_des_infractions_inter_reserves
    tuto_securiser_serveur
    keycloak
-   tuto_keycloak_geonature
 
 Contributeurs :
 ---------------
